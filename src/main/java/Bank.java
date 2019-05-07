@@ -23,7 +23,7 @@ public class Bank {
                     .append(customer.getName())
                     .append(" (")
                     .append(customer.getNumberOfAccounts())
-                    .append(" accounts)");
+                    .append(customer.getNumberOfAccounts()==1?" account)":" accounts)");
         }
         summary=stringBuilder.toString();
         return summary;
