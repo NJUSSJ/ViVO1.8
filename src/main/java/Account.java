@@ -31,6 +31,8 @@ public class Account {
         }
         transactions.add(new Transaction((-1) * amount));
     	if(sumTransactions() <= 0){
+    	    //回滚
+    	    transactions.remove(transactions.size()-1);
             throw new IllegalArgumentException("sumTransactions must be greater than zero");
         }
     }
