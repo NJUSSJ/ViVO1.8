@@ -29,6 +29,27 @@ public class Account {
     //根据不同的账号类型，确定不同利率进行利息计算
     public double interestEarned() {
         double amount = sumTransactions();
+        switch (accountType){
+            case 0:
+                amount *= 0.001;
+                break;
+            case 1:
+                if(amount<=1000){
+                    amount *= 0.001;
+                }else{
+                    amount = (amount-1000) * 0.002 + 1;
+                }
+                break;
+            case 2:
+                if(amount <= 1000){
+                    amount *= 0.02;
+                }else if(amount <= 2000){
+                    amount = 20 + (amount - 1000) * 0.05;
+                }else{
+                    amount = 20 + 50 + (amount - 2000) * 0.1;
+                }
+                break;
+        }
         return amount;
     }
     
