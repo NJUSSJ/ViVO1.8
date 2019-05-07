@@ -41,6 +41,7 @@ public class Customer {
         double checkingDeposit = 0.00, checkingWithdrawal = 0.00,
             savingDeposit = 0.00, savingWithdrawal = 0.00,
             maxiDeposit = 0.00, maxiWithdrawal= 0.00;
+        int checkingNum = 0, savingNum = 0, maxiNum = 0;
 
 
         // 遍历所有账户
@@ -51,6 +52,7 @@ public class Customer {
                 switch (account.getAccountType()) {
 
                     case Account.CHECKING:{
+                        checkingNum++;
                         if (transaction.amount > 0) {
                             checkingDeposit += transaction.amount;
                         }
@@ -61,6 +63,7 @@ public class Customer {
                     }
 
                     case Account.SAVINGS:{
+                        savingNum++;
                         if (transaction.amount > 0) {
                             savingDeposit += transaction.amount;
                         }
@@ -71,6 +74,7 @@ public class Customer {
                     }
 
                     case Account.MAXI_SAVINGS:{
+                        maxiNum ++;
                         if (transaction.amount > 0) {
                             maxiDeposit += transaction.amount;
                         }
@@ -86,21 +90,24 @@ public class Customer {
 
         statement += "Statement for "+ this.name +"\n" +
                 "\n" +
-                "Checking Account\n" +
-                (checkingDeposit != 0.00? "  deposit " + toDollars(checkingDeposit) + "\n": "") +
-                (checkingWithdrawal != 0.00? "  withdrawal " + toDollars(checkingWithdrawal) + "\n": "") +
-                "Total " + toDollars(checkingDeposit-checkingWithdrawal) + "\n" +
-                "\n" +
-                "Savings Account\n" +
-                (savingDeposit != 0.00? "  deposit " + toDollars(savingDeposit) + "\n": "") +
-                (savingWithdrawal != 0.00?"  withdrawal " + toDollars(savingWithdrawal) + "\n": "") +
-                "Total " + toDollars(savingDeposit - savingWithdrawal) + "\n" +
-                "\n" +
-                "Maxi Savings Account\n" +
-                (maxiDeposit != 0.00? "  deposit " + toDollars(maxiDeposit) + "\n": "") +
-                (maxiWithdrawal != 0.00? "  withdrawal " + toDollars(maxiDeposit) + "\n": "") +
-                "Total " + toDollars(maxiDeposit - maxiWithdrawal) + "\n" +
-                "\n" +
+                (checkingNum != 0?
+                        "Checking Account\n" +
+                                (checkingDeposit != 0.00? "  deposit " + toDollars(checkingDeposit) + "\n": "") +
+                                (checkingWithdrawal != 0.00? "  withdrawal " + toDollars(checkingWithdrawal) + "\n": "") +
+                                "Total " + toDollars(checkingDeposit-checkingWithdrawal) + "\n" +
+                                "\n" : "") +
+                (savingNum != 0?
+                        "Savings Account\n" +
+                                (savingDeposit != 0.00? "  deposit " + toDollars(savingDeposit) + "\n": "") +
+                                (savingWithdrawal != 0.00?"  withdrawal " + toDollars(savingWithdrawal) + "\n": "") +
+                                "Total " + toDollars(savingDeposit - savingWithdrawal) + "\n" +
+                                "\n": "") +
+                (maxiNum != 0?
+                        "Maxi Savings Account\n" +
+                                (maxiDeposit != 0.00? "  deposit " + toDollars(maxiDeposit) + "\n": "") +
+                                (maxiWithdrawal != 0.00? "  withdrawal " + toDollars(maxiDeposit) + "\n": "") +
+                                "Total " + toDollars(maxiDeposit - maxiWithdrawal) + "\n" +
+                                "\n": "") +
                 "Total In All Accounts " + toDollars(checkingDeposit-checkingWithdrawal +
                 savingDeposit - savingWithdrawal + maxiDeposit - maxiWithdrawal);
 
