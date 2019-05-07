@@ -1,6 +1,5 @@
 
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +83,6 @@ public class Customer {
             }
         }
 
-        DecimalFormat df = new DecimalFormat("#.00");
 
         statement += "Statement for "+ this.name +"\n" +
                 "\n" +
