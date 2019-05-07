@@ -1,5 +1,6 @@
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,26 +84,27 @@ public class Customer {
             }
         }
 
+        DecimalFormat df = new DecimalFormat("#.00");
 
         statement += "Statement for "+ this.name +"\n" +
                 "\n" +
                 "Checking Account\n" +
-                (checkingDeposit != 0.00? "  deposit $" + checkingDeposit + "\n": "") +
-                (checkingWithdrawal != 0.00? "  withdrawal" + checkingWithdrawal + "\n": "") +
-                "Total $" + (checkingDeposit-checkingWithdrawal) + "\n" +
+                (checkingDeposit != 0.00? "  deposit " + toDollars(checkingDeposit) + "\n": "") +
+                (checkingWithdrawal != 0.00? "  withdrawal " + toDollars(checkingWithdrawal) + "\n": "") +
+                "Total " + toDollars(checkingDeposit-checkingWithdrawal) + "\n" +
                 "\n" +
                 "Savings Account\n" +
-                (savingDeposit != 0.00? "  deposit $" + savingDeposit + "\n": "") +
-                (savingWithdrawal != 0.00?"  withdrawal $" + savingWithdrawal + "\n": "") +
-                "Total $" + (savingDeposit - savingWithdrawal) + "\n" +
+                (savingDeposit != 0.00? "  deposit " + toDollars(savingDeposit) + "\n": "") +
+                (savingWithdrawal != 0.00?"  withdrawal " + toDollars(savingWithdrawal) + "\n": "") +
+                "Total " + toDollars(savingDeposit - savingWithdrawal) + "\n" +
                 "\n" +
                 "Maxi Savings Account\n" +
-                (maxiDeposit != 0.00? "  deposit $" + maxiDeposit + "\n": "") +
-                (maxiWithdrawal != 0.00? "  withdrawal $" + maxiDeposit + "\n": "") +
-                "Total $" + (maxiDeposit - maxiWithdrawal) + "\n" +
+                (maxiDeposit != 0.00? "  deposit " + toDollars(maxiDeposit) + "\n": "") +
+                (maxiWithdrawal != 0.00? "  withdrawal " + toDollars(maxiDeposit) + "\n": "") +
+                "Total " + toDollars(maxiDeposit - maxiWithdrawal) + "\n" +
                 "\n" +
-                "Total In All Accounts $" + (checkingDeposit-checkingWithdrawal) +
-                (savingDeposit - savingWithdrawal) + (maxiDeposit - maxiWithdrawal);
+                "Total In All Accounts " + toDollars(checkingDeposit-checkingWithdrawal +
+                savingDeposit - savingWithdrawal + maxiDeposit - maxiWithdrawal);
 
         return statement;
     }
