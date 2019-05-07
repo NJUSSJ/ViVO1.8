@@ -18,12 +18,21 @@ public class Account {
     }
     //存款,需对存款数<=0的情况进行异常处理,异常详情参考测试用例
     public void deposit(double amount) {
-        
+        if(amount <= 0){
+            throw new IllegalArgumentException("amount must be greater than zero");
+        }
+        transactions.add(new Transaction(amount));
     }
     
     //取款,需对取款数和账户余额<=0的情况分别进行异常处理,异常详情参考测试用例
     public void withdraw(double amount) {
-    	
+    	if(amount <= 0){
+    	    throw new IllegalArgumentException("amount must be greater than zero");
+        }
+        transactions.add(new Transaction((-1) * amount));
+    	if(sumTransactions() <= 0){
+            throw new IllegalArgumentException("sumTransactions must be greater than zero");
+        }
     }
     
     //根据不同的账号类型，确定不同利率进行利息计算
@@ -35,6 +44,9 @@ public class Account {
   //返回账号余额
     public double sumTransactions() {
     	 double amount = 0.0;
+    	 for(Transaction t : transactions){
+    	     amount += t.amount;
+         }
          return amount;
     }
     
