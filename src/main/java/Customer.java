@@ -52,6 +52,7 @@ public class Customer {
                 switch (account.getAccountType()) {
 
                     case Account.CHECKING:{
+                        checkingNum++;
                         if (transaction.amount > 0) {
                             checkingDeposit += transaction.amount;
                         }
@@ -62,6 +63,7 @@ public class Customer {
                     }
 
                     case Account.SAVINGS:{
+                        savingNum++;
                         if (transaction.amount > 0) {
                             savingDeposit += transaction.amount;
                         }
@@ -72,6 +74,7 @@ public class Customer {
                     }
 
                     case Account.MAXI_SAVINGS:{
+                        maxiNum ++;
                         if (transaction.amount > 0) {
                             maxiDeposit += transaction.amount;
                         }
