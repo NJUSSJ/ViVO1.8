@@ -39,17 +39,17 @@ public class Account {
     public double interestEarned() {
         double amount = sumTransactions();
         switch (accountType){
-            case 0:
+            case Account.CHECKING:
                 amount *= 0.001;
                 break;
-            case 1:
+            case Account.SAVINGS:
                 if(amount<=1000){
                     amount *= 0.001;
                 }else{
                     amount = (amount-1000) * 0.002 + 1;
                 }
                 break;
-            case 2:
+            case Account.MAXI_SAVINGS:
                 if(amount <= 1000){
                     amount *= 0.02;
                 }else if(amount <= 2000){
