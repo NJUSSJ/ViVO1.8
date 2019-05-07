@@ -29,6 +29,9 @@ public class Customer {
     //计算客户各账户的总利率
     public double totalInterestEarned() {
         double total = 0;
+        for(Account account:accounts){
+            total+=account.interestEarned();
+        }
         return total;
     }
     
