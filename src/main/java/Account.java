@@ -60,6 +60,8 @@ public class Account {
                     amount = 20 + 50 + (amount - 2000) * 0.1;
                 }
                 break;
+            default:
+                break;
         }
         return amount;
     }
