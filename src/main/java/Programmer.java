@@ -1,3 +1,6 @@
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Programmer extends Worker {
 	public String language;
@@ -11,6 +14,7 @@ public class Programmer extends Worker {
 			String type) {
 		super(name, age, salary, "Programmer");
 		this.language = language;
+		this.type = type;
 	}
 
 	public String getLanguage() {
@@ -31,12 +35,42 @@ public class Programmer extends Worker {
 
 	// 按照规则计算当月的奖金
 	public String getBonus(int overtime) {
-		return null;
+		if (overtime < 0) {
+			throw new IllegalArgumentException("Overtime illegal!");
+		}
+
+		double reward = 0.00;
+
+		if (this.type.equals("Develop")) {
+			reward += (this.salary*0.2 +
+						(overtime >= 5? 500: overtime*100));
+		}
+		else if (this.type.equals("Test")) {
+			reward += (this.salary*0.15 +
+					(overtime >= 7? 1000: overtime*150));
+		}
+		else {
+			reward += (this.salary*0.25 +
+					(overtime >= 6? 300: overtime*50));
+		}
+
+		return String.format("%,.2f", Math.abs(reward));
 	}
 
 	// 展示基本信息
 	public String show() {
-		return null;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("My name is ")
+				.append(this.name)
+				.append(" ; age : ")
+				.append(this.age)
+				.append(" ; language : ")
+				.append(this.language)
+				.append(" ; salary : ")
+				.append(this.salary + ".");
+
+		return stringBuilder.toString();
+
 	}
 
 
@@ -79,6 +113,30 @@ public class Programmer extends Worker {
 	 * @param comment
 	 */
 	public String hideUserinfo(String comment) {
+
+		Pattern pattern = Pattern.compile("(@)"); // 通过是否含有@ 判断邮箱
+		Matcher matcher = pattern.matcher(comment);
+		boolean isMail = matcher.find();
+
+		if (isMail) {
+			comment = comment.toLowerCase();
+			int mid = matcher.start(); // @的位置
+			comment = comment.substring(0, 1) + "*****" +comment.substring(mid-1);
+		} else {
+			String numStr = comment.replaceAll("[+\\(\\)\\[\\[\\{}-]", "");
+			// 从字符串中提取出数字
+			String lastFour = numStr.substring(numStr.length()-4);
+			if (comment.charAt(0) == '+' || comment.charAt(0) == '-' || numStr.length()>10) {
+				// 国际号码
+				comment = "+**-***-***-" + lastFour;
+			}
+			else {
+				comment = "***-***-" + lastFour;
+			}
+
+		}
+
+
 		return comment;
 	}
 
