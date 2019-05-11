@@ -61,9 +61,9 @@ public class Manager extends Worker {
 			stringBuilder.append("Statement for ")
 					.append(this.name);
 
-			for (Worker worker: this.worker) {
+			for (Worker w: this.worker) {
 				stringBuilder.append("\n - ")
-						.append(worker.getName());
+						.append(w.getName());
 			}
 		}
 		else {
