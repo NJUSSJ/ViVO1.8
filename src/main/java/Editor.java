@@ -34,7 +34,12 @@ public class Editor extends Worker {
      * 
      */
     public void  textExtraction(String data){
-
+        String sep = System.getProperty("line.separator");
+        
+    }
+    private boolean isChineseByScript(char c){
+        Character.UnicodeScript sc=Character.UnicodeScript.of(c);
+        return sc == Character.UnicodeScript.HAN;
     }
     
 
