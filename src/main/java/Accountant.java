@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Accountant extends Worker {
 	public String password;
@@ -31,9 +33,152 @@ public class Accountant extends Worker {
      * @param number
      */
     public  String numberToWords (String number){
-		return password;
-
+    	long input=0;
+    	String illegal="illegal";
+    	try{
+    		input=Long.parseLong(number);
+		}catch(NumberFormatException n){
+    		return illegal;
+		}
+		if(isNumberIllegal(input)){
+			return illegal;
+		}else{
+			int inputI=Integer.parseInt(number);
+			if(inputI==0){
+				return "Zero";
+			}
+			String billion="Billion";
+			int billionN=1000000000;
+			String million="Million";
+			int millionN=1000000;
+			String thousand="Thousand";
+			int thousandN=1000;
+			String hundred="Hundred";
+			StringBuilder stringBuilder=new StringBuilder();
+			int temp=inputI/billionN;
+			inputI=inputI%billionN;
+			if(temp!=0){
+				stringBuilder.append(" ").append(numberToStrLTHundred(temp)).append(" ").append(billion);
+			}
+			for(int i=0;i<3;i++){
+				String tempCalculate;
+				int tempCalculateN;
+				if(i==0){
+					tempCalculate=million;
+					tempCalculateN=millionN;
+				}else if(i==1){
+					tempCalculate=thousand;
+					tempCalculateN=thousandN;
+				}else{
+					tempCalculate="";
+					tempCalculateN=1;
+				}
+				temp=inputI/tempCalculateN;
+				inputI=inputI%tempCalculateN;
+				if(temp!=0){
+					if(temp>=100){
+						stringBuilder.append(" ").append(numberToStrLTHundred(temp/100)).append(" ").append(hundred);
+					}
+					stringBuilder.append(" ").append(numberToStrLTHundred(temp%100)).append(" ").append(tempCalculate);
+				}
+			}
+			return stringBuilder.substring(1,stringBuilder.length()-1);
+		}
     }
+
+	/**
+	 * 小于100的整数转化为字符串
+	 * @param number 小于100的整数
+	 * @return 字符串
+	 */
+	private String numberToStrLTHundred(int number){
+		int singleDigit=number%10;
+    	int tenDigit=number/10;
+    	if(tenDigit==1){
+    		switch (singleDigit){
+				case 0:
+					return "Ten";
+				case 1:
+					return "Eleven";
+				case 2:
+					return "Twelve";
+				case 3:
+					return "Thirteen";
+				case 4:
+					return "Fourteen";
+				case 5:
+					return "Fifteen";
+				case 6:
+					return "Sixteen";
+				case 7:
+					return "Seventeen";
+				case 8:
+					return "Eighteen";
+				case 9:
+					return "Nineteen";
+				default:
+					return "";
+			}
+		}else if(tenDigit==0){
+    		return singleDigitToStr(singleDigit);
+		} else{
+    		return tenDigitToStr(tenDigit)+" "+singleDigitToStr(singleDigit);
+		}
+	}
+
+	private String singleDigitToStr(int n){
+		switch (n){
+			case 1:
+				return "One";
+			case 2:
+				return "Two";
+			case 3:
+				return "Three";
+			case 4:
+				return "Four";
+			case 5:
+				return "Five";
+			case 6:
+				return "Six";
+			case 7:
+				return "Seven";
+			case 8:
+				return "Eight";
+			case 9:
+				return "Nine";
+			default:
+				return "";
+		}
+	}
+	private String tenDigitToStr(int n){
+		switch (n){
+			case 2:
+				return "Twenty";
+			case 3:
+				return "Thirty";
+			case 4:
+				return "Forty";
+			case 5:
+				return "Fifty";
+			case 6:
+				return "Sixty";
+			case 7:
+				return "Seventy";
+			case 8:
+				return "Eighty";
+			case 9:
+				return "Ninety";
+			default:
+				return "";
+		}
+	}
+    private boolean isNumberIllegal(Long input){
+    	if(input<0){
+    		return true;
+		}
+    	long bound=Integer.MAX_VALUE;
+		return input >= bound;
+	}
     
     /**
      * 检验密码
@@ -53,7 +198,7 @@ public class Accountant extends Worker {
      * password: HelloWorld
      * return: 1
      * 
-     * @param password
+     *
      */
     public  int checkPassword(){
 		return 0;
