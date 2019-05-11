@@ -188,14 +188,18 @@ public class Editor extends Worker {
                     continue;
                 if(phraseLength > 20)
                     break;
-
                 int frequency = countFrequency(newsContent, phrase.toString());
-                if(frequency > mostFrequency){
+                if (frequency > mostFrequency) {
                     mostFrequentPhrase = phrase.toString();
                     mostFrequency = frequency;
                 }
+                if (frequency == mostFrequency
+                        && (mostFrequentPhrase.length() < phrase.toString().length())
+                        && phrase.substring(0, mostFrequentPhrase.length()).equals(mostFrequentPhrase)) {
+                    mostFrequentPhrase = phrase.toString();
+                    mostFrequency = frequency;
 
-
+                }
             }
         }
 		return mostFrequentPhrase;
