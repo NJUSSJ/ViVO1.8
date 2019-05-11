@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class Editor extends Worker {
@@ -35,13 +36,56 @@ public class Editor extends Worker {
      */
     public void  textExtraction(String data){
         String sep = System.getProperty("line.separator");
-        
+        int start=0;
+        int prePunctuation=0;
+        int count=4;
+        int N=data.length();
+        char c;
+        int i=0;
+        StringBuilder res=new StringBuilder("    ");
+        data=data.replaceAll(" ","");
+        while(i<N){
+            c=data.charAt(i);
+            if(isChineseByScript(c)||isChinesePunctuation(c)){
+                count+=2;
+            }else {
+                count++;
+            }
+            if(count>32){
+                res.append(data, start, prePunctuation+1);
+                res.append(sep);
+                count=0;
+                start=prePunctuation+1;
+                i=start;
+                continue;
+            }
+            if(isChinesePunctuation(c)||isPunctuation(c)){
+                prePunctuation=i;
+            }
+            i++;
+        }
+        res.append(data,start,N);
+        System.out.println(res.toString());
     }
+
+    private boolean isPunctuation(char c){
+        return Pattern.matches("\\p{Punct}", c + "");
+    }
+
     private boolean isChineseByScript(char c){
         Character.UnicodeScript sc=Character.UnicodeScript.of(c);
         return sc == Character.UnicodeScript.HAN;
     }
-    
+
+    private boolean isChinesePunctuation(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        return ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_FORMS
+                || ub == Character.UnicodeBlock.VERTICAL_FORMS;
+    }
+
 
     /**
      * 标题排序
