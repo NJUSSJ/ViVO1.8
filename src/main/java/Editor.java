@@ -1,4 +1,6 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class Editor extends Worker {
@@ -34,9 +36,57 @@ public class Editor extends Worker {
      * 
      */
     public void  textExtraction(String data){
-
+        String sep = System.getProperty("line.separator");
+        int start=0;
+        int prePunctuation=0;
+        int count=4;
+        int N=data.length();
+        char c;
+        int i=0;
+        StringBuilder res=new StringBuilder("    ");
+        data=data.replaceAll(" ","");
+        while(i<N){
+            c=data.charAt(i);
+            if(isChineseByScript(c)||isChinesePunctuation(c)){
+                count+=2;
+            }else {
+                count++;
+            }
+            if(count>32){
+                res.append(data, start, prePunctuation+1);
+                res.append(sep);
+                count=0;
+                start=prePunctuation+1;
+                i=start;
+                continue;
+            }
+            if(isChinesePunctuation(c)||isPunctuation(c)){
+                prePunctuation=i;
+            }
+            i++;
+        }
+        res.append(data,start,N);
+        System.out.println(res.toString());
     }
-    
+
+    private boolean isPunctuation(char c){
+        return Pattern.matches("\\p{Punct}", c + "");
+    }
+
+    private boolean isChineseByScript(char c){
+        Character.UnicodeScript sc=Character.UnicodeScript.of(c);
+        return sc == Character.UnicodeScript.HAN;
+    }
+
+    private boolean isChinesePunctuation(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        return ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_FORMS
+                || ub == Character.UnicodeBlock.VERTICAL_FORMS;
+    }
+
 
     /**
      * 标题排序
@@ -74,10 +124,65 @@ public class Editor extends Worker {
      * @param newsContent
      */
     public String findHotWords(String newsContent){
-		return newsContent;
+        String mostFrequentPhrase = "";
+        int mostFrequency = 0;
+
+        for(int startPoint = 0; startPoint < newsContent.length(); startPoint++){
+            StringBuilder phrase = new StringBuilder();
+            int phraseLength = 0;
+            for(int stringLength = 1; stringLength <= 20; stringLength++){  // stringLength为词语字符串长度
+                char newChar = newsContent.charAt(startPoint + stringLength - 1);
+                if(!includedInWord(newChar)){
+                    break;
+                }
+                phrase.append(newChar);
+                if(isChineseByScript(newChar))
+                    phraseLength += 2;
+                else
+                    phraseLength += 1;
+                if(phraseLength < 4)
+                    continue;
+                if(phraseLength > 20)
+                    break;
+
+                int frequency = countFrequency(newsContent, phrase.toString());
+                if(frequency > mostFrequency){
+                    mostFrequentPhrase = phrase.toString();
+                    mostFrequency = frequency;
+                }
+
+
+            }
+        }
+		return mostFrequentPhrase;
 
     }
-    
+
+
+    private boolean isEnglishPunctuation(char c){
+        return Pattern.matches("\\p{Punct}", c + "");
+    }
+
+    private boolean includedInWord(char c){
+        return !isChinesePunctuation(c) && !isEnglishPunctuation(c) && (c != ' ');
+    }
+
+    private int countFrequency(String text, String pattern){
+        int frequency = 0;
+        for(int i = 0; i < text.length() - pattern.length(); i++){
+            boolean matched = true;
+            for(int j = 0; j < pattern.length(); j++){
+                if(text.charAt(i+j) != pattern.charAt(j)) {
+                    matched = false;
+                    break;
+                }
+            }
+            if(matched)
+                frequency++;
+        }
+        return frequency;
+    }
+
     /**
     *
     *相似度对比
@@ -102,7 +207,51 @@ public class Editor extends Worker {
     * @param title2
     */
    public double minDistance(String title1, String title2){
-	return 0;
+       int[][] d;
+       int n=title1.length();
+       int m=title2.length();
+       int i;
+       int j;
+       char ch1;
+       char ch2;
+       int temp;
+       if(n == 0){
+           return getSimilarityRatio(title1,title2,m);
+       }
+       if(m == 0){
+           return getSimilarityRatio(title1,title2,n);
+       }
+       d=new int[n + 1][m + 1];
+       for(i = 0; i <= n; i++){
+           d[i][0] = i;
+       }
+       for(j = 0; j <= m; j++){
+           d[0][j]=j;
+       }
+       for(i = 1;i <= n; i++){
+           ch1 = title1.charAt(i -1);
+           for(j = 1;j <= m; j++){
+               ch2 = title2.charAt(j - 1);
+               if(ch1 == ch2){
+                   temp = 0;
+               }else{
+                   temp = 1;
+               }
+               d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + temp);
+           }
+       }
+       return getSimilarityRatio(title1,title2,d[n][m]);
+   }
 
+   private int min(int a,int b,int c){
+       if(a >= b){
+           a =b;
+       }
+       return a < c ? a : c;
+   }
+
+   private double getSimilarityRatio(String str1,String str2,int minStep){
+       double res = (1-(double)minStep/Math.max(str1.length(),str2.length()))*100;
+       return BigDecimal.valueOf(res).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
    }
 }
