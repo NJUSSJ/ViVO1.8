@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -151,7 +152,51 @@ public class Editor extends Worker {
     * @param title2
     */
    public double minDistance(String title1, String title2){
-	return 0;
+       int[][] d;
+       int n=title1.length();
+       int m=title2.length();
+       int i;
+       int j;
+       char ch1;
+       char ch2;
+       int temp;
+       if(n == 0){
+           return getSimilarityRatio(title1,title2,m);
+       }
+       if(m == 0){
+           return getSimilarityRatio(title1,title2,n);
+       }
+       d=new int[n + 1][m + 1];
+       for(i = 0; i <= n; i++){
+           d[i][0] = i;
+       }
+       for(j = 0; j <= m; j++){
+           d[0][j]=j;
+       }
+       for(i = 1;i <= n; i++){
+           ch1 = title1.charAt(i -1);
+           for(j = 1;j <= m; j++){
+               ch2 = title2.charAt(j - 1);
+               if(ch1 == ch2){
+                   temp = 0;
+               }else{
+                   temp = 1;
+               }
+               d[i][j] = min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + temp);
+           }
+       }
+       return getSimilarityRatio(title1,title2,d[n][m]);
+   }
 
+   private int min(int a,int b,int c){
+       if(a >= b){
+           a =b;
+       }
+       return a < c ? a : c;
+   }
+
+   private double getSimilarityRatio(String str1,String str2,int minStep){
+       double res = (1-(double)minStep/Math.max(str1.length(),str2.length()))*100;
+       return BigDecimal.valueOf(res).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
    }
 }
