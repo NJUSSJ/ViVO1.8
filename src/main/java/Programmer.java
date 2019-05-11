@@ -131,6 +131,14 @@ public class Programmer extends Worker {
 			int mid = matcher.start(); // @的位置
 			comment = comment.substring(0, 1) + "*****" +comment.substring(mid-1);
 		} else {
+			String regEx="[`~!#$%^&*@+=|':;',.<>/?~！#￥%……&*（）——+|{}【】‘；：”“’。，、？a-zA-Z ]";
+			Pattern p=Pattern.compile(regEx);
+			Matcher m=p.matcher(comment);
+
+			if (m.find()) {
+				return "illegal";
+			}
+
 			String numStr = comment.replaceAll("[+\\(\\)\\[\\[\\{}-]", "");
 			// 从字符串中提取出数字
 			String lastFour = numStr.substring(numStr.length()-4);

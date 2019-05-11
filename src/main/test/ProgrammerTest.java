@@ -38,7 +38,7 @@ public class ProgrammerTest {
 	@Test(timeout=4000)
 	public void test5() {
 		Programmer p = new Programmer("p",21,8000,"Java","UI");
-		assertEquals("***-***-7890",p.hideUserinfo("1(234)567-890"));
+		assertEquals("***-***-7890",p.hideUserinfo("1(234)567-8cn"));
 	}
 	
 	@Test(timeout=4000)
