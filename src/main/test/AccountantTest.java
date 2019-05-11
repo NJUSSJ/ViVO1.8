@@ -28,4 +28,10 @@ public class AccountantTest {
 		Accountant a = new Accountant("p",21,8000,"IamOK");
 		assertEquals("illegal",a.numberToWords("-1"));
 	}
+
+	@Test
+	public void test5(){
+		Accountant a = new Accountant("p",21,8000,"IamOK");
+		assertEquals("Two Billion One Hundred Thirty Two Million Eight Hundred Sixty Six Thousand Eight Hundred Forty Two",a.numberToWords("2132866842"));
+	}
 }
