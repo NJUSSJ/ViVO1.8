@@ -119,10 +119,13 @@ public class Programmer extends Worker {
 		boolean isMail = matcher.find();
 
 		if (isMail) {
-			Pattern validMail = Pattern.compile("^[A-Za-z0-9@]+$"); // 通过是否含有@ 判断邮箱
-			Matcher validMatcher = pattern.matcher(comment);
+			String regEx="[`~!#$%^&*()+=|{}':;',\\[\\]<>/?~！#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+			Pattern p=Pattern.compile(regEx);
+			Matcher m=p.matcher(comment);
 
-//			if (validMatcher.find())
+			if (m.find()) {
+				return "illegal";
+			}
 
 			comment = comment.toLowerCase();
 			int mid = matcher.start(); // @的位置
