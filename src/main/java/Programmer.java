@@ -1,3 +1,4 @@
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,7 +122,7 @@ public class Programmer extends Worker {
 			Pattern validMail = Pattern.compile("^[A-Za-z0-9@]+$"); // 通过是否含有@ 判断邮箱
 			Matcher validMatcher = pattern.matcher(comment);
 
-			if (validMatcher.find())
+//			if (validMatcher.find())
 
 			comment = comment.toLowerCase();
 			int mid = matcher.start(); // @的位置
@@ -137,7 +138,10 @@ public class Programmer extends Worker {
 					comment = "+*-";
 				} else if (numStr.length() - 10 == 2) {
 					comment = "+**-";
+				} else {
+					comment = "+***-";
 				}
+				comment += ("***-***-" + lastFour);
 			}
 			else {
 				comment = "***-***-" + lastFour;
