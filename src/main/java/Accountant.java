@@ -8,7 +8,7 @@ public class Accountant extends Worker {
 	
 	//初始化Accountant
 	public Accountant(String name, int age, int salary, String password) {
-
+		super(name, age, salary, "Accountant");
 	}
 	
     /**

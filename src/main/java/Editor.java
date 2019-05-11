@@ -9,7 +9,7 @@ public class Editor extends Worker {
 	
 	//初始化Editor
 	public Editor(String name, int age, int salary) {
-
+        super(name, age, salary, "Editor");
 	}
 		
 	/**
