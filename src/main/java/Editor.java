@@ -124,10 +124,65 @@ public class Editor extends Worker {
      * @param newsContent
      */
     public String findHotWords(String newsContent){
-		return newsContent;
+        String mostFrequentPhrase = "";
+        int mostFrequency = 0;
+
+        for(int startPoint = 0; startPoint < newsContent.length(); startPoint++){
+            StringBuilder phrase = new StringBuilder();
+            int phraseLength = 0;
+            for(int stringLength = 1; stringLength <= 20; stringLength++){  // stringLength为词语字符串长度
+                char newChar = newsContent.charAt(startPoint + stringLength - 1);
+                if(!includedInWord(newChar)){
+                    break;
+                }
+                phrase.append(newChar);
+                if(isChineseByScript(newChar))
+                    phraseLength += 2;
+                else
+                    phraseLength += 1;
+                if(phraseLength < 4)
+                    continue;
+                if(phraseLength > 20)
+                    break;
+
+                int frequency = countFrequency(newsContent, phrase.toString());
+                if(frequency > mostFrequency){
+                    mostFrequentPhrase = phrase.toString();
+                    mostFrequency = frequency;
+                }
+
+
+            }
+        }
+		return mostFrequentPhrase;
 
     }
-    
+
+
+    private boolean isEnglishPunctuation(char c){
+        return Pattern.matches("\\p{Punct}", c + "");
+    }
+
+    private boolean includedInWord(char c){
+        return !isChinesePunctuation(c) && !isEnglishPunctuation(c) && (c != ' ');
+    }
+
+    private int countFrequency(String text, String pattern){
+        int frequency = 0;
+        for(int i = 0; i < text.length() - pattern.length(); i++){
+            boolean matched = true;
+            for(int j = 0; j < pattern.length(); j++){
+                if(text.charAt(i) != pattern.charAt(j)) {
+                    matched = false;
+                    break;
+                }
+            }
+            if(matched)
+                frequency++;
+        }
+        return frequency;
+    }
+
     /**
     *
     *相似度对比
