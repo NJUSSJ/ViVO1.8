@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public class Accountant extends Worker {
 	public String password;
@@ -226,11 +224,11 @@ public class Accountant extends Worker {
 				specialCharCount++;
 		}
 		if(password.length() < PASSWORD_MIN_LENGTH){
-    		return (PASSWORD_MIN_LENGTH - password.length() + specialCharCount); //TODO 太复杂了
+    		return (PASSWORD_MIN_LENGTH - password.length() + specialCharCount);
 		}
 		if(password.length() > PASSWORD_MAX_LENGTH){
     		int overflowCharCount = password.length() - PASSWORD_MAX_LENGTH;
-    		return (overflowCharCount >= specialCharCount ? overflowCharCount : specialCharCount); //TODO 太复杂了
+    		return (overflowCharCount >= specialCharCount ? overflowCharCount : specialCharCount);
 		}
 
 		List<Integer> dupList = new ArrayList<Integer>(); //将连续的相同字符压缩成一个数字
@@ -279,8 +277,4 @@ public class Accountant extends Worker {
 	private boolean isNumber(char c){
 		return c >= '0' && c <= '9';
 	}
-
-//	private boolean isSpecialChar(char c){
-//		return !isLowerCase(c) && !isUpperCase(c) && isNumber(c);
-//	}
 }

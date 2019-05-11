@@ -40,12 +40,12 @@ public class Editor extends Worker {
         int start = 0;
         int prePunctuation = 0;
         int count = 4;
-        int N = data.length();
+        int length = data.length();
         char c;
         int i=0;
         StringBuilder res=new StringBuilder("    ");
         data=data.replaceAll(" ","");
-        while(i<N){
+        while(i<length){
             c=data.charAt(i);
             if(isChineseByScript(c)||isChinesePunctuation(c)){
                 count+=2;
@@ -65,7 +65,7 @@ public class Editor extends Worker {
             }
             i++;
         }
-        res.append(data,start,N);
+        res.append(data,start,length);
         System.out.println(res.toString());
     }
 
