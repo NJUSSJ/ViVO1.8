@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class Editor extends Worker {
@@ -74,10 +75,65 @@ public class Editor extends Worker {
      * @param newsContent
      */
     public String findHotWords(String newsContent){
-		return newsContent;
+        String mostFrequentPhrase = "";
+        int mostFrequency = 0;
+
+        for(int startPoint = 0; startPoint < newsContent.length(); startPoint++){
+            StringBuilder phrase = new StringBuilder();
+            int phraseLength = 0;
+            for(int stringLength = 1; stringLength <= 20; stringLength++){  // stringLength为词语字符串长度
+                char newChar = newsContent.charAt(startPoint + stringLength - 1);
+                if(!includedInWord(newChar)){
+                    break;
+                }
+                phrase.append(newChar);
+                if(isChineseByScript(newChar))
+                    phraseLength += 2;
+                else
+                    phraseLength += 1;
+                if(phraseLength < 4)
+                    continue;
+                if(phraseLength > 20)
+                    break;
+
+                countFrequency(newsContent, phrase.toString());
+                //TODO
+
+            }
+        }
+		return mostFrequentPhrase;
 
     }
-    
+    private boolean isChineseByScript(char c) {
+        Character.UnicodeScript sc = Character.UnicodeScript.of(c);
+        return sc == Character.UnicodeScript.HAN;
+    }
+
+    private boolean isChinesePunctuation(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        return ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_FORMS
+                || ub == Character.UnicodeBlock.VERTICAL_FORMS;
+    }
+
+    private boolean isEnglishPunctuation(char c){
+        return Pattern.matches("\\p{Punct}", c + "");
+    }
+
+    private boolean includedInWord(char c){
+        return !isChinesePunctuation(c) && !isEnglishPunctuation(c) && (c != ' ');
+    }
+
+    private int countFrequency(String text, String pattern){
+        for(int i = 0; i < text.length(); i++){
+            //TODO
+
+        }
+        return 0;
+    }
+
     /**
     *
     *相似度对比
