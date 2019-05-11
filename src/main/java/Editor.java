@@ -1,7 +1,11 @@
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import java.util.*;
+
+import net.sourceforge.pinyin4j.*;
 
 public class Editor extends Worker {
 
@@ -105,7 +109,47 @@ public class Editor extends Worker {
      * @param newsList
      */
     public ArrayList<String> newsSort(ArrayList<String> newsList){
-		return newsList;
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        // 每一个标题和他对应的拼音字符串
+        for(String title: newsList) {
+            String str = "";
+
+            for (int i = 0; i<title.length(); i++) {
+                String value = PinyinHelper.toHanyuPinyinStringArray(title.charAt(i))[0];
+                str += (value.substring(0, value.length()-1));
+            }
+            map.put(title, str);
+        }
+
+		return sortMap(map);
+
+    }
+    
+
+    public ArrayList<String> sortMap(HashMap<String, String> map) {
+        ArrayList<Map.Entry<String, String>> infoIds =
+                new ArrayList<HashMap.Entry<String, String>>(map.entrySet());
+        // 对HashMap中的 value 进行排序
+        Collections.sort(infoIds, new Comparator<HashMap.Entry<String, String>>() {
+            @Override
+            public int compare(HashMap.Entry<String, String> o1,
+                               HashMap.Entry<String, String> o2) {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        ArrayList<String> res = new ArrayList<String>();
+        for (int i = 0; i < infoIds.size(); i++) {
+            Map.Entry<String,String> entry = infoIds.get(i);
+            res.add(entry.getKey());
+        }
+
+        return res;
+
+
+
+
 
     }
 
