@@ -37,10 +37,10 @@ public class Editor extends Worker {
      */
     public void  textExtraction(String data){
         String sep = System.getProperty("line.separator");
-        int start=0;
-        int prePunctuation=0;
-        int count=4;
-        int N=data.length();
+        int start = 0;
+        int prePunctuation = 0;
+        int count = 4;
+        int N = data.length();
         char c;
         int i=0;
         StringBuilder res=new StringBuilder("    ");
