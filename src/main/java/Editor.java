@@ -167,11 +167,19 @@ public class Editor extends Worker {
     }
 
     private int countFrequency(String text, String pattern){
-        for(int i = 0; i < text.length(); i++){
-            //TODO
-
+        int frequency = 0;
+        for(int i = 0; i < text.length() - pattern.length(); i++){
+            boolean matched = true;
+            for(int j = 0; j < pattern.length(); j++){
+                if(text.charAt(i) != pattern.charAt(j)) {
+                    matched = false;
+                    break;
+                }
+            }
+            if(matched)
+                frequency++;
         }
-        return 1;
+        return frequency;
     }
 
     /**
