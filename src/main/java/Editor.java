@@ -171,7 +171,7 @@ public class Editor extends Worker {
         for(int i = 0; i < text.length() - pattern.length(); i++){
             boolean matched = true;
             for(int j = 0; j < pattern.length(); j++){
-                if(text.charAt(i) != pattern.charAt(j)) {
+                if(text.charAt(i+j) != pattern.charAt(j)) {
                     matched = false;
                     break;
                 }
