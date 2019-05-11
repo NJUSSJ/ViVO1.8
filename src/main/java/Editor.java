@@ -144,15 +144,19 @@ public class Editor extends Worker {
                 if(phraseLength > 20)
                     break;
 
-                countFrequency(newsContent, phrase.toString());
-                //TODO
+                int frequency = countFrequency(newsContent, phrase.toString());
+                if(frequency > mostFrequency){
+                    mostFrequentPhrase = phrase.toString();
+                    mostFrequency = frequency;
+                }
+
 
             }
         }
 		return mostFrequentPhrase;
 
     }
-    
+
 
     private boolean isEnglishPunctuation(char c){
         return Pattern.matches("\\p{Punct}", c + "");
@@ -167,7 +171,7 @@ public class Editor extends Worker {
             //TODO
 
         }
-        return 0;
+        return 1;
     }
 
     /**
