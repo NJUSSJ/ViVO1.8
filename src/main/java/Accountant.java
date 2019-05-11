@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class Accountant extends Worker {
 	public String password;
+	private static final int PASSWORD_MIN_LENGTH = 8;
+	private static final int PASSWORD_MAX_LENGTH = 20;
 
 	public Accountant() {
 
@@ -11,6 +15,7 @@ public class Accountant extends Worker {
 	//初始化Accountant
 	public Accountant(String name, int age, int salary, String password) {
 		super(name, age, salary, "Accountant");
+		this.password = password;
 	}
 	
     /**
@@ -85,6 +90,7 @@ public class Accountant extends Worker {
 			return stringBuilder.substring(1,stringBuilder.length()-1);
 		}
     }
+
 
 	/**
 	 * 小于100的整数转化为字符串
@@ -197,11 +203,84 @@ public class Accountant extends Worker {
      *
      * password: HelloWorld
      * return: 1
-     * 
      *
      */
     public  int checkPassword(){
-		return 0;
+    	if(password == null || password.length() == 0){
+    		return PASSWORD_MIN_LENGTH;
+		}
+
+		int lowerCaseCount = 0;
+    	int upperCaseCount = 0;
+    	int numberCount = 0;
+    	int specialCharCount = 0;
+    	for(int i = 0; i < password.length(); i++){
+    		char c = password.charAt(i);
+			if(isLowerCase(c))
+				lowerCaseCount++;
+			else if(isUpperCase(c))
+				upperCaseCount++;
+			else if(isNumber(c))
+				numberCount++;
+			else
+				specialCharCount++;
+		}
+		if(password.length() < PASSWORD_MIN_LENGTH){
+    		return (PASSWORD_MIN_LENGTH - password.length() + specialCharCount); //TODO 太复杂了
+		}
+		if(password.length() > PASSWORD_MAX_LENGTH){
+    		int overflowCharCount = password.length() - PASSWORD_MAX_LENGTH;
+    		return (overflowCharCount >= specialCharCount ? overflowCharCount : specialCharCount); //TODO 太复杂了
+		}
+
+		List<Integer> dupList = new ArrayList<Integer>(); //将连续的相同字符压缩成一个数字
+		char previousChar = 0;
+		int previousCharCount = 0;
+		for(int i = 0; i < password.length();i++){
+			char currentChar = password.charAt(i);
+			if(currentChar == previousChar){
+				previousCharCount++;
+			}
+			else{
+				if(previousChar != 0){
+					dupList.add(previousCharCount);
+				}
+				previousChar = currentChar;
+				previousCharCount = 1;
+			}
+		}
+		dupList.add(previousCharCount); //最后一个
+
+		int numOfCharToChange = 0;
+		for (Integer aDupList : dupList) {
+			numOfCharToChange += aDupList / 3;
+		}
+
+		int numOfCharToAdd = 0;
+		if(lowerCaseCount == 0)
+			numOfCharToAdd += 1;
+		if(upperCaseCount == 0)
+			numOfCharToAdd += 1;
+		if(numberCount == 0)
+			numOfCharToAdd += 1;
+
+		return Math.max(Math.max(numOfCharToAdd, numOfCharToChange), specialCharCount);
 
     }
+
+    private boolean isLowerCase(char c){
+		return c >= 'a' && c <= 'z';
+	}
+
+	private boolean isUpperCase(char c){
+		return c >= 'A' && c <= 'Z';
+	}
+
+	private boolean isNumber(char c){
+		return c >= '0' && c <= '9';
+	}
+
+//	private boolean isSpecialChar(char c){
+//		return !isLowerCase(c) && !isUpperCase(c) && isNumber(c);
+//	}
 }
