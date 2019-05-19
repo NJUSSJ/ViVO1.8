@@ -21,6 +21,7 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
+      <meta-data android:name="android.max_aspect" android:value="2.1" />
+   </application>
 
 </manifest>
