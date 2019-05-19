@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Button, Icon} from 'native-base'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -24,6 +25,10 @@ export default class App extends Component {
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <Text>一米八高个儿团！！！</Text>
+        <Button iconLeft style={{alignSelf: 'center'}}>
+            <Icon name='home' />
+            <Text style={{color: '#fff'}}>这是React-Native-Base的按钮组件</Text>
+        </Button>
       </View>
     );
   }
