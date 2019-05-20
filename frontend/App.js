@@ -33,10 +33,16 @@ export default class App extends Component {
 
   async getResponse() {
     try {
-      let formData = new FormData();
-      let response = await API._fetch(API.get({url: '/sample'}));
+      let user = {
+        name: 'YYQ'
+      }
+      
+      let response = await API._fetch(API.post( '/sample/post', user));
+      console.log(response)
       let responseJson = await response.json();
+      console.log(responseJson)
       this.setState({responseData: responseJson})
+
     }
     catch(error) {
       console.error('异常:', error)
@@ -53,10 +59,11 @@ export default class App extends Component {
             <Icon name='home' />
             <Text style={{color: '#fff'}}>这是React-Native-Base的按钮组件</Text>
         </Button>
-        <Text>尝试调用服务器方法Reponse: {JSON.stringify(this.state.responseData)}</Text>
-        <Button rounded success style={{alignSelf: 'center'}}>
-          <Text>尝试调用服务器方法Reponse: {this.state.responseData.name}</Text>
+        
+         <Button rounded success style={{alignSelf: 'center', marginTop: 20}}>
+          <Text>调用服务器POST方法Reponse: {JSON.stringify(this.state.responseData)}</Text>
         </Button>
+
       </View>
     );
   }

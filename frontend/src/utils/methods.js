@@ -43,14 +43,14 @@ function resetFontSize(init) {
  * @property {string} [url] - 接口名（API）
  * @property {formdata} [formData] - 请求接口时的参数
  */
-function post({ url, formData } = {}) {
-    console.log('post')
+function post(url, postData) {
+    console.log('postData:',postData,JSON.stringify(postData))
     options = {
         method: "POST",
         headers: {
-            Accept: "application/json"
+            "Content-Type":  "application/json"
         },
-        body: formData
+        body: JSON.stringify(postData)
     };
     var promise = new Promise(function (resolve, reject) {
         fetch(address + url, options).then(data => {
