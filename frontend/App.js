@@ -36,7 +36,6 @@ export default class App extends Component {
       let formData = new FormData();
       let response = await API._fetch(API.get({url: '/sample'}));
       let responseJson = await response.json();
-      console.error(responseJson)
       this.setState({response: responseJson})
     }
     catch(error) {

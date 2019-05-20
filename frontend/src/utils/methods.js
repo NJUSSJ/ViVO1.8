@@ -198,5 +198,4 @@ export default {
     backhandler,
     modalAlert,
     confirmAlert,
-    POST
 }
