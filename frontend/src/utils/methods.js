@@ -1,7 +1,7 @@
 import { Dimensions, StatusBar, Platform, BackHandler, Alert } from 'react-native'
 // import ImageCropPicker from "react-native-image-crop-picker";
 // import Toast from 'react-native-root-toast';
-// const address = 'http://appback.futuredigitalplanets.com/index.php/'
+const address = 'http://139.224.232.10:8080/vivo'
 const { width, height, scale } = Dimensions.get('window')
 
 /**
@@ -64,41 +64,16 @@ function post({ url, formData } = {}) {
     return promise;
 
 }
-function POST({ url} = {}) {
-    console.log('post')
-    options = {
-        method: "POST",
-        headers: {
-            Accept: "application/json"
-        },
-     
-    };
-    var promise = new Promise(function (resolve, reject) {
-        fetch(address + url, options).then(data => {
-            console.log('******')
-            resolve(data);
-            console.log('data'+data)
-        }).catch(error => {
-            reject(error);
-        });
-    });
-    return promise;
-
-}
-
-function get({ url, formData } = {}) {
-    if (global.token === undefined)
-        global.token = ''
-
+function get({ url } = {}) {
+  
     let options = {
         method: "GET",
         headers: {
             Accept: "application/json",
-            authorization: "Bearer " + token
         }
     };
     let promise = new Promise(function (resolve, reject) {
-        fetch(address + url + strJoinAsParams(formData), options).then(data => {
+        fetch(address + url , options).then(data => {
             resolve(data);
         }).catch(error => {
             reject(error);

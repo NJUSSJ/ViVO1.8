@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import {Button, Icon} from 'native-base'
+import API from './src/utils/methods'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,6 +19,30 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      response: ''
+    }
+  }
+  
+
+  componentDidMount() {
+   this.getResponse();
+  }
+
+  async getResponse() {
+    try {
+      let formData = new FormData();
+      let response = await API._fetch(API.get({url: '/sample'}));
+      let responseJson = await response.json();
+      console.error(responseJson)
+      this.setState({response: responseJson})
+    }
+    catch(error) {
+      console.error('异常:', error)
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -28,6 +53,10 @@ export default class App extends Component {
         <Button iconLeft style={{alignSelf: 'center'}}>
             <Icon name='home' />
             <Text style={{color: '#fff'}}>这是React-Native-Base的按钮组件</Text>
+        </Button>
+        <Text>尝试调用服务器方法Reponse: {this.state.response}</Text>
+        <Button rounded success style={{alignSelf: 'center'}}>
+          <Text>尝试调用服务器方法Reponse: {this.state.response}</Text>
         </Button>
       </View>
     );
