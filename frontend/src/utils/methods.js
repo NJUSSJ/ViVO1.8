@@ -1,6 +1,7 @@
 import { Dimensions, StatusBar, Platform, BackHandler, Alert } from 'react-native'
 // import ImageCropPicker from "react-native-image-crop-picker";
 // import Toast from 'react-native-root-toast';
+import ImageCropPicker from "react-native-image-crop-picker";
 const address = 'http://139.224.232.10:8080/vivo'
 const { width, height, scale } = Dimensions.get('window')
 
@@ -69,7 +70,7 @@ function get(url) {
     let options = {
         method: "GET",
         headers: {
-            Accept: "application/json",
+            // Accept: "application/json",
         }
     };
     let promise = new Promise(function (resolve, reject) {
@@ -81,6 +82,29 @@ function get(url) {
     });
     return promise;
 }
+function imagePicker() {
+    console.log('imagePicker')
+    StatusBar.setBarStyle("dark-content");
+    let promise = new Promise(function (resolve, reject) {
+        ImageCropPicker
+            .openPicker({ mediaType: "photo", writeTempFile: false, loadingLabelText: "正在处理图片" })
+            .then(data => {
+                StatusBar.setBarStyle("light-content");
+                resolve(data);
+            })
+            .catch(error => {
+                StatusBar.setBarStyle("light-content");
+                switch (error.code) {
+                    case "E_PERMISSION_MISSING":
+                        reject('请在iPhone的“设置-隐私”选项中，允许访问你的相册')
+                    default:
+                        reject('操作取消')
+                }
+            });
+    });
+    return promise;
+}
+
 /**
  * // 设置异步超时返回
  * @param {function} fetch_promise - 异步函数
@@ -198,4 +222,5 @@ export default {
     backhandler,
     modalAlert,
     confirmAlert,
+    imagePicker,
 }
