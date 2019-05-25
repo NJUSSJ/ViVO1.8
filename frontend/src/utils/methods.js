@@ -64,7 +64,7 @@ function post(url, postData) {
     return promise;
 
 }
-function get({ url } = {}) {
+function get(url) {
   
     let options = {
         method: "GET",
