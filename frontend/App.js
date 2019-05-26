@@ -9,6 +9,7 @@ import {Button, Icon} from 'native-base'
 import API from './src/utils/methods'
 import Home from './src/pages/Home'
 import Login from './src/pages/Login'
+import SignUp from './src/pages/SignUp'
 import HighScore from './src/pages/HighScore'
 import Search from './src/pages/Search'
 
@@ -65,7 +66,13 @@ const BottomTab = createBottomTabNavigator(
 
 const StacksOverTabs = createStackNavigator({
   Login: {
-      screen: Login,
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
+  },
+  SignUp: {
+      screen: SignUp,
       navigationOptions: {
         header: null
       }

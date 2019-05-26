@@ -1,37 +1,44 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 import API from '../utils/methods'
-export default class Login extends Component {
+export default class SignUp extends Component {
     constructor() {
         super();
         this.state = {
-            'username': '',
+            'uname': '',
             'password': ''
         };
-        this.login = this.login.bind(this);
+        this.goToLogin = this.goToLogin.bind(this);
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.loginPane}>
-                    <Text style={{fontSize: 20}}>用户名:</Text>
-                    <TextInput style={styles.inputArea} onChangeText={(text) => {this.setState({username: text})}}/>
+                    <Text style={{fontSize: 20}}>学号:</Text>
+                    <TextInput style={styles.inputArea}/>
                     <Text style={{fontSize: 20}}>密码:</Text>
-                    <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
-                    <Button title="登录" onPress={this.login} color='#be8dbd'/>
-                    <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
+                    <TextInput style={styles.inputArea} secureTextEntry={true}/>
+                    <Text style={{fontSize: 20}}>确认密码:</Text>
+                    <TextInput style={styles.inputArea} secureTextEntry={true}/>
+                    <Button title="注册" onPress={this.signUp} color='#be8dbd'/>
+                    <Text style={{marginTop: 20, marginLeft: 80}} onPress={this.goToLogin}>已有账号？去登录</Text>
                 </View>
             </View>
         );
     }
 
-    async login() {
+    async signUp() {
+        Alert.alert("!");
         try {
-
+            let response = API.post("", {});
         } catch (e) {
             console.log(e);
         }
+    }
+
+    goToLogin(){
+        this.props.navigation.navigate('Login');
     }
 
 }
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
     },
 
     loginPane: {
-        marginTop: 200
+        marginTop: 170
     },
 
     inputArea: {
