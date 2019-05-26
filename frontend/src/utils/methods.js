@@ -69,15 +69,16 @@ function f_post(url, formData) {
     options = {
         method: "POST",
         headers: {
-            Accept: "application/json"
+            'Content-Type':'multipart/form-data',
         },
-        body: formData
+        body: formData,
+        dataTyle: 'text'
     };
     var promise = new Promise(function (resolve, reject) {
         fetch(address + url, options).then(data => {
             console.log('******')
             resolve(data);
-            console.log('data'+data)
+            console.log('data '+data)
         }).catch(error => {
             reject(error);
         });

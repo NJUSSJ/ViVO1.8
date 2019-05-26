@@ -12,6 +12,8 @@ import Login from './src/pages/Login'
 import SignUp from './src/pages/SignUp'
 import HighScore from './src/pages/HighScore'
 import Search from './src/pages/Search'
+import Detail from './src/pages/Detail'
+import Score from './src/pages/Score'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -65,28 +67,38 @@ const BottomTab = createBottomTabNavigator(
 
 
 const StacksOverTabs = createStackNavigator({
+
+  // Score: {
+  //   screen: Score,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
+  // Login: {
+  //   screen: Login,
+  //   navigationOptions: {
+  //     header: null
+  //   }
+  // },
+  SignUp: {
+      screen: SignUp,
+      navigationOptions: ({ navigation }) => ({
+        header: null,
+      })
+  },
   Root: {
     screen: BottomTab,
-    navigationOptions: {
-      header: null
-    }
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+    })
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+    })
   },
   
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null
-    }
-  },
-
-
-
-  SignUp: {
-    screen: SignUp,
-    navigationOptions: {
-      header: null
-    }
-  }
 })
 
 const StacksOverTab = createAppContainer(StacksOverTabs);
