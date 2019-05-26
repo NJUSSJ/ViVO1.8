@@ -14,6 +14,7 @@ import HighScore from './src/pages/HighScore'
 import Search from './src/pages/Search'
 import Detail from './src/pages/Detail'
 import Score from './src/pages/Score'
+import SearchResult from './src/pages/SerachResult'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -60,10 +61,16 @@ const SearchStack = createStackNavigator({
       header: null
     }
   },
+  SearchResult: {
+    screen: SearchResult,
+    navigationOptions: {
+      title: "搜索结果"
+    }
+  },
   Detail: {
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
-      header: null,
+      header: null
     })
   }
 });
