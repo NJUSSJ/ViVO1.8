@@ -12,7 +12,7 @@ export default class HighScore extends Component {
         this.getHighScore = this.getHighScore.bind(this);
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.getHighScore();
     }
 
