@@ -12,7 +12,8 @@
     "react-native": "0.59.8",
     "react-native-gesture-handler": "^1.0.16",
     "react-native-snap-carousel": "^3.8.0",
-    "react-navigation": "^3.5.1"
+    "react-navigation": "^3.5.1",
+    "react-native-root-toast": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

@@ -113,14 +113,7 @@ const BottomTab = createBottomTabNavigator(
 
 
 const StacksOverTabs = createStackNavigator({
-
-  // Score: {
-  //   screen: Score,
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // },
-
+  
   Login: {
     screen: Login,
     navigationOptions: {
@@ -146,6 +139,14 @@ const StacksOverTabs = createStackNavigator({
       header: null,
     })
   },
+  
+  Score: {
+    screen: Score,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   
 })
 

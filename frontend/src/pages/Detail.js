@@ -67,7 +67,9 @@ export default class Detail extends Component {
            <View style={{padding: 20}}>
             <View style={{flexDirection: 'row', width: API.width}}>
                     <Text style={styles.courseName}>{info.courseName}</Text>
-                    <TouchableOpacity style={{position: 'absolute', right: 40}}>
+                    <TouchableOpacity 
+                    onPress={()=>this.props.navigation.navigate('Score', {courseInfo: info})}
+                    style={{position: 'absolute', right: 40}}>
                         <Text style={styles.remarkBtn} >去评价</Text>
                     </TouchableOpacity>
                 </View>

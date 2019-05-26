@@ -1,6 +1,6 @@
 import { Dimensions, StatusBar, Platform, BackHandler, Alert } from 'react-native'
 // import ImageCropPicker from "react-native-image-crop-picker";
-// import Toast from 'react-native-root-toast';
+import Toast from 'react-native-root-toast';
 // import ImageCropPicker from "react-native-image-crop-picker";
 const address = 'http://139.224.232.10:8080/vivo'
 const { width, height, scale } = Dimensions.get('window')
@@ -228,6 +228,23 @@ function confirmAlert({
     ], { cancelable: false });
 }
 
+
+function toastLong(content) {
+    let toast;
+    if (toast !== undefined) {
+        Toast.hide(toast);
+    }
+    toast = Toast.show(content.toString(), {
+        backgroundColor: '#be8dbd',
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0
+    });
+};
+
 export default {
     get,
     address,
@@ -243,5 +260,6 @@ export default {
     backhandler,
     modalAlert,
     confirmAlert,
-    f_post
+    f_post,
+    toastLong
 }

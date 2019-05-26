@@ -34,8 +34,25 @@ export default class Login extends Component {
             formData.append('username', this.state.username);
             formData.append('password', this.state.password);
             let response = await API._fetch(API.f_post('/login', formData));
-            Alert.alert(await response.text());
-12        } catch (e) {
+            let res = await response.text();
+            
+            switch(res) {
+                case 'success': {
+                    this.props.navigation.navigate('Root');
+                    API.toastLong('登录成功');
+                    global.username = this.state.username;
+                    break;
+                }
+                case 'wrongPassword': {
+                    API.toastLong('用户密码错误');
+                    break;
+                }
+                default: {
+                    API.toastLong('该用户未注册');
+                    break;
+                }
+            }
+        } catch (e) {
             console.log(e);
         }
     }
