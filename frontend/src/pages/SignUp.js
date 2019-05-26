@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 import API from '../utils/methods'
+import {Card} from 'native-base'
 export default class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +58,11 @@ export default class SignUp extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.loginPane}>
+                <Card style={{width: API.width-40, height: API.height*3/4, alignItems: 'center',
+            justifyContent: 'center'}}>
+                 <Text style={{fontSize: 23, borderBottomColor: '#be8dbd', borderBottomWidth: 1, marginBottom: 40}}>注    册</Text>
+                   
+                <View >
                     <Text style={{fontSize: 20}}>学号:</Text>
                     <TextInput style={styles.inputArea}
                         onChangeText={(text)=>this.setState({uname: text})}
@@ -73,6 +78,8 @@ export default class SignUp extends React.Component {
                     <Button title="注册" onPress={()=>{this.signUp()}} color='#be8dbd'/>
                     <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.goToLogin()}}>已有账号？去登录</Text>
                 </View>
+                </Card>
+                
             </View>
         );
     }
@@ -86,11 +93,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        width: API.width
-    },
-
-    loginPane: {
-        marginTop: 170
+        justifyContent: 'center',
+        width: API.width,
+        height: API.height,
+        backgroundColor: '#be8dbd'
     },
 
     inputArea: {

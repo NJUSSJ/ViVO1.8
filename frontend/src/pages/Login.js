@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
+import {Card} from 'native-base'
 export default class Login extends Component {
     constructor() {
         super();
@@ -15,15 +16,18 @@ export default class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.loginPane}>
-                    <Text style={{fontSize: 20}}>用户名:</Text>
-                    <TextInput style={styles.inputArea} onChangeText={(text) => {this.setState({username: text})}}/>
-                    <Text style={{fontSize: 20}}>密码:</Text>
-                    <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
-                    <Button title="登录" onPress={this.login} color='#be8dbd'/>
-                    <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
-
-                </View>
+                <Card style={{width: API.width-40, height: API.height*3/4, alignItems: 'center',
+        justifyContent: 'center'}}>
+                    <Text style={{fontSize: 23, borderBottomColor: '#be8dbd', borderBottomWidth: 1, marginBottom: 50}}>登   录</Text>
+                    <View >
+                        <Text style={{fontSize: 20}}>用户名:</Text>
+                        <TextInput style={styles.inputArea} onChangeText={(text) => {this.setState({username: text})}}/>
+                        <Text style={{fontSize: 20}}>密码:</Text>
+                        <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
+                        <Button title="登录" onPress={this.login} color='#be8dbd'/>
+                        <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
+                    </View>
+                </Card>
             </View>
         );
     }
@@ -70,7 +74,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        width: API.width
+        justifyContent: 'center',
+        width: API.width,
+        height: API.height,
+        backgroundColor: '#be8dbd'
     },
 
     loginPane: {
