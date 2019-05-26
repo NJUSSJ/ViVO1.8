@@ -6,9 +6,19 @@ export default class Home extends Component {
     render(){
         return <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.recommandPrompt}>
-                为你推荐
+                热门课程
             </Text>
-            <SnapCarousel/>
+            <View>
+                <SnapCarousel/>
+            </View>
+            
+            <View style={{marginTop: 20}}>
+                <Text style={styles.recommandPrompt}>
+                    热门学院
+                </Text>
+            </View>
+
+            
         </ScrollView>
     }
 }
@@ -18,7 +28,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     recommandPrompt:{
-        fontSize: 30,
+        fontSize: 28,
         color: '#000',
         margin: 10,
     }
