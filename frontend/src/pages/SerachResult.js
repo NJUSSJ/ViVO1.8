@@ -44,7 +44,6 @@ export default class SerachResult extends Component {
             this.setState({
                 data: data
             });
-            Alert.alert(JSON.stringify(data));
         } catch (e) {
             console.log(e);
         }
