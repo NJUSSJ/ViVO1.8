@@ -9,6 +9,7 @@ import {Button, Icon} from 'native-base'
 import API from './src/utils/methods'
 import Home from './src/pages/Home'
 import ImagePicker from './src/pages/ImagePicker'
+import Login from './src/pages/Login'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -53,6 +54,12 @@ const BottomTab = createBottomTabNavigator(
 
 
 const StacksOverTabs = createStackNavigator({
+  Login: {
+      screen: Login,
+      navigationOptions: {
+        header: null
+      }
+  },
   Root: {
     screen: BottomTab
   }
