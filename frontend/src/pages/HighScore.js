@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class HighScore extends Component {
@@ -12,8 +12,6 @@ export default class HighScore extends Component {
                         fontSize: 30,
                         marginLeft: 10,
                         marginTop: 10,
-                        borderLeftWidth: 5,
-                        paddingLeft: 10,
                         borderColor: 'grey',
                         color: 'black'
                     }}>高分课程</Text>
@@ -22,7 +20,11 @@ export default class HighScore extends Component {
                 <View style={styles.list}>
                     <FlatList
                         data={data}
-                        renderItem={({item}) => <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department} teacher={item.teacher} overallScore={item.overallScore}/>}/>
+                        keyExtractor={(item, index) => item.courseId}
+                        renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.navigation.navigate('Detail', {courseId: item.courseId})}}>
+                            <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department}
+                                        teacher={item.teacher} overallScore={item.overallScore}/>
+                        </TouchableOpacity>}/>
                 </View>
 
             </View>
@@ -32,7 +34,7 @@ export default class HighScore extends Component {
 
 const data = [
     {
-        key: '1',
+        courseId: '1',
         picUrl: require("../assets/dianzijishu.png"),
         courseName: "C++程序设计",
         department: '软件学院',
@@ -40,7 +42,7 @@ const data = [
         overallScore: '4.5'
     },
     {
-        key: '2',
+        courseId: '2',
         picUrl: require("../assets/jisuanji.png"),
         courseName: "数据库开发技术",
         department: '软件学院',
@@ -48,63 +50,7 @@ const data = [
         overallScore: '2'
     },
     {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        key: '2',
+        courseId: '3',
         picUrl: require("../assets/jisuanji.png"),
         courseName: "数据库开发技术",
         department: '软件学院',
@@ -126,6 +72,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
         marginTop: 10,
-        borderColor: 'grey'
+        borderColor: 'grey',
+        borderTopWidth: 1
     }
 });

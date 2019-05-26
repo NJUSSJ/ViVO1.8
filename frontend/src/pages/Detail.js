@@ -23,10 +23,12 @@ export default class Detail extends Component {
                 picUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558870633991&di=4ce8574d972552b602f59c8121a3073a&imgtype=0&src=http%3A%2F%2Ftu.openossfile.com%3A9186%2Fgroup1%2FM00%2F45%2F61%2FrBgIBlzOT8fJxRFnAACPJGomnIM780.jpg',
                 commonList: [
                     {
+                        courseCommentId: '1',
                         username: '刘昊然',
                         comment: '这门课好棒啊～～～',
                     },
                     {
+                        courseCommentId: '2',
                         username: '杨郁芩',
                         comment: '作业有点难，不过老师讲得很好啦',
                     },
@@ -94,7 +96,7 @@ export default class Detail extends Component {
                     </View>
                 </View>
 
-                <View style={{marginTop: 30, borderLeftColor: 'e6e6e6', borderLeftWidth: 2, paddingLeft: 20}}>
+                <View style={{marginTop: 30, borderLeftColor: '#e6e6e6', borderLeftWidth: 2, paddingLeft: 20}}>
                     <Text style={styles.classInfo}>教师：{info.instructor}</Text>
                     <Text style={styles.classInfo}>院系：{info.department}</Text>
                     <Text style={styles.classInfo}>上课时间：{info.classTime}</Text>
@@ -111,7 +113,7 @@ export default class Detail extends Component {
                     </CardItem>
                 </Card>
 
-                <Text style={{marginTop: 10,borderLeftColor: 'e6e6e6', borderLeftWidth: 2, paddingLeft: 20, marginBottom: 10}}>用户评论</Text>
+                <Text style={{marginTop: 10,borderLeftColor: '#e6e6e6', borderLeftWidth: 2, paddingLeft: 20, marginBottom: 10}}>用户评论</Text>
                 <FlatList
                     data={info.commonList}
                     renderItem={({item})=> 
@@ -119,6 +121,7 @@ export default class Detail extends Component {
                         username={item.username} 
                         comment={item.comment}
                     />}
+                    keyExtractor={(item, index) => item.courseCommentId}
                     />
            </View>
         </ScrollView>
