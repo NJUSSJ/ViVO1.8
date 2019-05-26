@@ -35,7 +35,7 @@ export default class SnapCarousel extends Component {
     _renderItem ({item, index}) {
         return (
             <TouchableOpacity style={styles.cardContainer}
-                onPress={()=>{this.props.nav.navigate('Detail', {courseId: item.courseId})}}
+                // onPress={()=>{this.props.nav.navigate('Detail', {courseId: item.courseId})}}
             >
                 <Image style={styles.image} source={{uri: item.picUrl}}></Image>
                 <Text style={styles.courseName}>{ item.courseName }</Text>

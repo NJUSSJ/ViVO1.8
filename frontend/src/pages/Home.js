@@ -13,7 +13,7 @@ export default class Home extends Component {
                 热门课程
             </Text>
             <View>
-                <SnapCarousel nav={this.props.navigation}/>
+                <SnapCarousel/>
             </View>
             
             <View style={{marginTop: 20}}>
