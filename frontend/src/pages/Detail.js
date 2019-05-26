@@ -38,14 +38,15 @@ export default class Detail extends Component {
     }
 
     componentDidMount() {
-    //    this.getCourseInfo(id);
+        let id = this.props.navigation.getParam('courseId');
+        this.getCourseInfo(id);
     }
 
     async getCourseInfo(id) {
         try {
             let formData = new FormData();
             formData.append('courseId', id)
-            let response = await API._fetch(API.f_post('/detail', formData));
+            let response = await API._fetch(API.f_post('/course/detail', formData));
             let responseJson = await response.json();
 
             this.setState({courseInfo: responseJson})
@@ -79,7 +80,7 @@ export default class Detail extends Component {
                     <View style={{marginTop: 10, marginLeft: 5}}>
                         <StarRating
                             maxStars={5}
-                            rating={info.overallScore}
+                            rating={info.overallScore.toString()}
                             disabled={true}
                             starSize={18}
                         />
@@ -123,7 +124,7 @@ export default class Detail extends Component {
                         username={item.username} 
                         comment={item.comment}
                     />}
-                    keyExtractor={(item, index) => item.courseCommentId}
+                    keyExtractor={(item, index) => item.courseCommentId.toString()}
                     />
            </View>
            

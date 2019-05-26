@@ -12,8 +12,23 @@ export default class Score extends Component{
             overallScore: 0,
             teacherScore: 0,
             contentScore: 0,
-            comment: ''
+            comment: '',
+            username: ''
         }
+    }
+
+    componentDidMount(): void {
+        storage.load({
+            key: 'username',
+            id: '1'
+        }).then(ret => {
+            this.setState({
+                username: ret
+            });
+
+
+        })
+
     }
 
     onOverallPress(value) {
@@ -27,20 +42,22 @@ export default class Score extends Component{
     }
 
     async submit(id) {
-        let formData = new FormData();
-        formData.append('courseId', id);
-        formData.append('username', username);
-        formData.append('comment', this.state.comment);
-        formData.append('overallScore', this.state.overallScore);
-        formData.append('teacherScore', this.state.teacherScore);
-        formData.append('contentScore', this.state.contentScore);
-        formData.append('date', new Date());
-
         try {
+            let formData = new FormData();
+            formData.append('courseId', id);
+            formData.append('username', username);
+            formData.append('comment', this.state.comment);
+            formData.append('overallScore', this.state.overallScore);
+            formData.append('teacherScore', this.state.teacherScore);
+            formData.append('contentScore', this.state.contentScore);
+            formData.append('date', new Date());
+
             let response = await API._fetch(API.f_post('/comment/upload', formData));
+            let data = await response.json();
+            Alert(JSON.stringify(data));
         }
         catch(error) {
-            Alert.alert('上传失败:', error)
+            console.log(error);
         }
     }
 
@@ -98,10 +115,10 @@ export default class Score extends Component{
                         }}
                         value={this.state.comment}
                         style={styles.inputBox}
-                    ></Textarea>
+                    />
                     
             </Card>
-            <Button title={'完成评价'} color={'#be8dbd'} onPress={()=>this.submit(info.courseId)}></Button>
+            <Button title={'完成评价'} color={'#be8dbd'} onPress={() => this.submit(info.courseId)}/>
         </ScrollView>
     }
 }

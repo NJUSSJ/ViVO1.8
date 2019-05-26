@@ -9,6 +9,8 @@ export default class Search extends Component {
         };
         this.gotoSearchResult = this.gotoSearchResult.bind(this);
     }
+
+
     render() {
         return (
             <View style={styles.container}>

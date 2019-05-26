@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, ScrollView} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class SerachResult extends Component {
@@ -21,17 +21,17 @@ export default class SerachResult extends Component {
 
 
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.list}>
                     <FlatList
                         data={this.state.data}
-                        keyExtractor={(item, index) => item.courseId}
+                        keyExtractor={(item, index) => item.courseId.toString()}
                         renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.navigation.navigate('Detail', {courseId: item.courseId})}}>
                             <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department}
                                         teacher={item.instructor} overallScore={item.overallScore}/>
                         </TouchableOpacity>}/>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 

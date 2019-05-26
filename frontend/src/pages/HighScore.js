@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert, ScrollView} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class HighScore extends Component {
@@ -18,7 +18,7 @@ export default class HighScore extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.title}>
                     <Text style={{
                         fontSize: 30,
@@ -32,14 +32,14 @@ export default class HighScore extends Component {
                 <View style={styles.list}>
                     <FlatList
                         data={this.state.data}
-                        keyExtractor={(item, index) => item.courseId}
+                        keyExtractor={(item, index) => item.courseId.toString()}
                         renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.navigation.navigate('Detail', {courseId: item.courseId})}}>
                             <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department}
                                         teacher={item.instructor} overallScore={item.overallScore}/>
                         </TouchableOpacity>}/>
                 </View>
 
-            </View>
+            </ScrollView>
         );
     }
 
@@ -47,12 +47,11 @@ export default class HighScore extends Component {
         try {
             let formData = new FormData();
             formData.append('keyword', 'keyword');
-            let response = await API._fetch(API.f_post('/course/all', formData));
+            let response = await API._fetch(API.f_post('/course/highScore', formData));
             let data = await response.json();
             this.setState({
                 data: data
             });
-            Alert.alert(JSON.stringify(data));
         } catch (e) {
             console.log(e);
         }
