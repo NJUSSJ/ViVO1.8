@@ -8,8 +8,9 @@ import {Platform, StyleSheet, Text, View, Image} from 'react-native';
 import {Button, Icon} from 'native-base'
 import API from './src/utils/methods'
 import Home from './src/pages/Home'
-import ImagePicker from './src/pages/ImagePicker'
 import Login from './src/pages/Login'
+import HighScore from './src/pages/HighScore'
+import Search from './src/pages/Search'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,20 +20,29 @@ const instructions = Platform.select({
 });
 
 const bottomTabPages = {
+  HighScore: {
+    screen: HighScore,
+    navigationOptions: {
+      tabBarLabel: '高分',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Image source={require('./src/assets/huangguan.png')} style={styles.icon}/> )
+    }
+  }, 
   Home: {
     screen: Home,
     navigationOptions: {
       tabBarLabel: '主页',
       tabBarIcon: ({ tintColor, focused }) => (
-        <Image source={require('./src/assets/zhuye.png')} style={styles.icon}/> )
-    }
+        <Image source={require('./src/assets/kecheng.png')} style={styles.centerIcon}/> ),
+      
+    },
   }, 
-  ImagePicker: {
-    screen: ImagePicker,
+  Search: {
+    screen: Search,
     navigationOptions: {
-      tabBarLabel: '上传图片',
+      tabBarLabel: '搜索',
       tabBarIcon: ({ tintColor, focused }) => (
-        <Image source={require('./src/assets/wenjian.png')} style={styles.icon}/> )
+        <Image source={require('./src/assets/sousuo.png')} style={styles.icon}/> )
     },
   }, 
 }
@@ -40,13 +50,13 @@ const bottomTabPages = {
 const BottomTab = createBottomTabNavigator(
   bottomTabPages,
   {
-    nitialRouteName: 'Home',
+    initialRouteName: 'Home',
     tabBarPosition: 'bottom',
     lazy: true,
     swipeEnabled: true,
     tabBarOptions: {
-      activeTintColor: '#8a81f9',
-      inactiveTintColor: '#343131',
+      activeTintColor: '#be8dbd',
+      inactiveTintColor: '#bfbfbf',
       showIcon: true
   }
   }
@@ -61,7 +71,10 @@ const StacksOverTabs = createStackNavigator({
       }
   },
   Root: {
-    screen: BottomTab
+    screen: BottomTab,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 
@@ -86,24 +99,15 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
   icon: {
     width: API.reset(25),
     height: API.reset(25)
+  },
+  centerIcon: {
+    width: API.reset(44),
+    height:API.reset(40),
+    position: 'absolute',
+    zIndex: 100,
+    bottom: 2,
   }
 });
