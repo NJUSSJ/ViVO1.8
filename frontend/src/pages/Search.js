@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TouchableOpacity, 
     Image, TextInput, Alert, ImageBackground} from 'react-native';
 import API from '../utils/methods'
-import { BlurView, VibrancyView } from "@react-native-community/blur";
 
 export default class Search extends Component {
     constructor(props){
