@@ -45,7 +45,9 @@ export default class HighScore extends Component {
 
     async getHighScore() {
         try {
-            let response = await API._fetch(API.f_post('/course/all'));
+            let formData = new FormData();
+            formData.append('keyword', 'keyword');
+            let response = await API._fetch(API.f_post('/course/all', formData));
             let data = await response.json();
             this.setState({
                 data: data

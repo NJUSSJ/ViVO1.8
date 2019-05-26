@@ -13,7 +13,7 @@ export default class CourseItem extends React.Component{
             <View style={styles.container}>
                 <Image source={this.props.picUrl} style={{width: 70, height: 70}}/>
                 <View style={{marginLeft: 10}}>
-                    <Text style={{fontSize: 25, color: 'black'}}>{this.props.courseName}</Text>
+                    <Text style={{fontSize: 25, color: 'black', width: 200}}>{this.props.courseName}</Text>
                     <Text style={{marginTop: 5}}>{this.props.department}、{this.props.teacher}</Text>
                 </View>
                 <View style={{flexDirection: 'row', position: 'absolute', right: 50}}>
