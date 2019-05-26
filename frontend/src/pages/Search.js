@@ -19,7 +19,9 @@ export default class Search extends Component {
             <View style={styles.container} source={require('../assets/searchBackground.jpg')}>
                 <Image style={[styles.container, {opacity: 0.2}]} source={require('../assets/searchBackground.jpg')}></Image>
                 <View style={styles.search}>
-                    <TextInput style={{width: 300, borderRadius: 15, borderWidth: 1, borderColor: 'grey', fontSize: 22}} onChangeText={(text) => {this.setState({searchText: text})}}/>
+                    <TextInput style={{width: 300, borderRadius: 15, borderWidth: 1, borderColor: 'grey', 
+                    fontSize: 22, backgroundColor: '#fff', paddingLeft: 20}} 
+                    onChangeText={(text) => {this.setState({searchText: text})}}/>
                     <TouchableOpacity onPress={this.gotoSearchResult}>
                         <Image source={require('../assets/sousuo-2.png')} style={{width: 50, height: 50, marginLeft: 10}}/>
                     </TouchableOpacity>
