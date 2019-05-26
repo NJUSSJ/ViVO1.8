@@ -33,7 +33,7 @@ export default class HighScore extends Component {
 const data = [
     {
         key: '1',
-        picUrl: require("../assets/sousuo.png"),
+        picUrl: require("../assets/dianzijishu.png"),
         courseName: "C++程序设计",
         department: '软件学院',
         teacher: '郑滔',
@@ -41,11 +41,75 @@ const data = [
     },
     {
         key: '2',
-        picUrl: require("../assets/kecheng.png"),
-        courseName: "C++程序设计",
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
         department: '软件学院',
-        teacher: '郑滔',
-        overallScore: '4.5'
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
+    },
+    {
+        key: '2',
+        picUrl: require("../assets/jisuanji.png"),
+        courseName: "数据库开发技术",
+        department: '软件学院',
+        teacher: '刘嘉',
+        overallScore: '2'
     }
 ];
 
