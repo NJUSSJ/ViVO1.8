@@ -65,6 +65,25 @@ function post(url, postData) {
     return promise;
 
 }
+function f_post(url, formData) {
+    options = {
+        method: "POST",
+        headers: {
+            Accept: "application/json"
+        },
+        body: formData
+    };
+    var promise = new Promise(function (resolve, reject) {
+        fetch(address + url, options).then(data => {
+            console.log('******')
+            resolve(data);
+            console.log('data'+data)
+        }).catch(error => {
+            reject(error);
+        });
+    });
+    return promise;
+}
 function get(url) {
   
     let options = {
@@ -82,6 +101,7 @@ function get(url) {
     });
     return promise;
 }
+
 function imagePicker() {
     console.log('imagePicker')
     StatusBar.setBarStyle("dark-content");

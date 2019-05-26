@@ -40,6 +40,8 @@ export default class ImagePicker extends Component {
             type: 'multipart/form-data',
           }
           formData.append("file", submitPhoto);
+          formData.append("temp", '123');
+          console.log(formData);
           
           let _this = this
           
