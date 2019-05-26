@@ -12,12 +12,12 @@ export default class CourseItem extends React.Component{
         return (
             <View style={styles.container}>
                 <Image source={this.props.picUrl} style={{width: 70, height: 70}}/>
-                <View style={{marginLeft: 10}}>
-                    <Text style={{fontSize: 25, color: 'black'}}>{this.props.courseName}</Text>
+                <View style={{marginLeft: 9}}>
+                    <Text style={{fontSize: 22, color: 'black', overflow: 'hidden', width: API.reset(200)}}>{this.props.courseName}</Text>
                     <Text style={{marginTop: 5}}>{this.props.department}、{this.props.teacher}</Text>
                 </View>
                 <View style={{flexDirection: 'row', position: 'absolute', right: 50}}>
-                    <StarRating maxStars={5} rating={this.props.overallScore} disabled={true} starSize={25} style={{marginTop: 20}}/>
+                    <StarRating maxStars={5} rating={this.props.overallScore} disabled={true} starSize={20} style={{marginTop: 30}}/>
                     <Text style={{marginTop: 5, marginLeft:10, fontSize: 20}}>{this.props.overallScore}</Text>
                 </View>
             </View>
