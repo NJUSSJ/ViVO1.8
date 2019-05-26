@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Carousel from 'react-native-snap-carousel';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import API from '../utils/methods'
+import StarRating from './StarRating';
 
 export default class SnapCarousel extends Component {
 
@@ -33,6 +34,15 @@ export default class SnapCarousel extends Component {
             <View style={styles.cardContainer}>
                 <Image style={styles.image} source={{uri: item.picUrl}}></Image>
                 <Text style={styles.courseName}>{ item.courseName }</Text>
+                <View style={{flexDirection: 'row', paddingLeft: 10}}>
+                    <StarRating
+                        maxStars={5}
+                        rating={item.overallScore}
+                        disabled={true}
+                        starSize={25}
+                    />
+                    <Text style={styles.score}>{item.overallScore}</Text>
+                </View>
             </View>
         );
     }
@@ -46,7 +56,6 @@ export default class SnapCarousel extends Component {
               renderItem={this._renderItem}
               sliderWidth={400}
               itemWidth={400}
-              style={{alignSelf: 'center'}}
             />
         );
     }
@@ -59,7 +68,8 @@ const styles = StyleSheet.create({
         borderColor: '#000',
         borderRadius: 5,
         marginLeft: API.width/20,
-        backgroundColor: '#000'
+        backgroundColor: '#000',
+        alignItems: 'flex-start'
     },
     image:{
         width: API.width*9/10-2,
@@ -69,6 +79,11 @@ const styles = StyleSheet.create({
     courseName: {
         fontSize: 25,
         color: '#fff',
-        padding: 10
+        paddingTop: 10,
+        paddingLeft: 10
+    },
+    score: {
+        color: '#f4ea2a',
+        margin: 10
     }
 })
