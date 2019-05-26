@@ -4,13 +4,16 @@ import SnapCarousel from '../components/SnapCarousel'
 import DepartmentItem from '../components/DepartmentItem'
 
 export default class Home extends Component {
+    constructor(props) {
+        super(props);
+    }
     render(){
         return <ScrollView contentContainerStyle={styles.container}>
             <Text style={styles.recommandPrompt}>
                 热门课程
             </Text>
             <View>
-                <SnapCarousel/>
+                <SnapCarousel nav={this.props.navigation}/>
             </View>
             
             <View style={{marginTop: 20}}>
