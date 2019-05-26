@@ -148,12 +148,12 @@ const StacksOverTabs = createStackNavigator({
       header: null,
     })
   },
-  Detail: {
-    screen: Detail,
-    navigationOptions: ({ navigation }) => ({
-      header: null,
-    })
-  },
+  // Detail: {
+  //   screen: Detail,
+  //   navigationOptions: ({ navigation }) => ({
+  //     header: null,
+  //   })
+  // },
   
   Score: {
     screen: Score,

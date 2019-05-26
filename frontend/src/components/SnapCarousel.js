@@ -59,8 +59,8 @@ export default class SnapCarousel extends Component {
               ref={(c) => { this._carousel = c; }}
               data={this.state.entries}
               renderItem={this._renderItem}
-              sliderWidth={400}
-              itemWidth={400}
+              sliderWidth={API.width*19/20}
+              itemWidth={API.width*19/20}
             />
         );
     }

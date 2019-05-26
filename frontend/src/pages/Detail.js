@@ -59,9 +59,9 @@ export default class Detail extends Component {
         let info = this.state.courseInfo;
         return <ScrollView>
             <ImageBackground source={{uri: info.picUrl}} style={styles.headerImg}>
-                <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
-                    <Image source={require('../assets/bj-icon-fh.png')} style={styles.backIcon}></Image>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
+                 <Image source={require('../assets/bj-icon-fh.png')} style={styles.backIcon}></Image>
+            </TouchableOpacity>
             </ImageBackground>
 
            <View style={{padding: 20}}>
@@ -126,6 +126,7 @@ export default class Detail extends Component {
                     keyExtractor={(item, index) => item.courseCommentId}
                     />
            </View>
+           
         </ScrollView>
     }
 }
@@ -138,9 +139,8 @@ const styles = StyleSheet.create({
     backIcon: {
         width: 20,
         height: 20,
-        position: 'absolute',
-        top: 20,
-        left: 20
+        margin: 20,
+        zIndex: 100
     },
     courseName: {
         fontSize: 30,
