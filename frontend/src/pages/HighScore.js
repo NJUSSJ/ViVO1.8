@@ -4,6 +4,18 @@ import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class HighScore extends Component {
 
+    constructor(){
+        super();
+        this.state = {
+            data: []
+        };
+        this.getHighScore = this.getHighScore.bind(this);
+    }
+
+    componentDidMount(): void {
+        this.getHighScore();
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,45 +31,32 @@ export default class HighScore extends Component {
                 </View>
                 <View style={styles.list}>
                     <FlatList
-                        data={data}
+                        data={this.state.data}
                         keyExtractor={(item, index) => item.courseId}
                         renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.navigation.navigate('Detail', {courseId: item.courseId})}}>
                             <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department}
-                                        teacher={item.teacher} overallScore={item.overallScore}/>
+                                        teacher={item.instructor} overallScore={item.overallScore}/>
                         </TouchableOpacity>}/>
                 </View>
 
             </View>
         );
     }
-}
 
-const data = [
-    {
-        courseId: '1',
-        picUrl: require("../assets/dianzijishu.png"),
-        courseName: "C++程序设计",
-        department: '软件学院',
-        teacher: '郑滔',
-        overallScore: '4.5'
-    },
-    {
-        courseId: '2',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
-    },
-    {
-        courseId: '3',
-        picUrl: require("../assets/jisuanji.png"),
-        courseName: "数据库开发技术",
-        department: '软件学院',
-        teacher: '刘嘉',
-        overallScore: '2'
+    async getHighScore() {
+        try {
+            let response = await API._fetch(API.f_post('/course/all'));
+            let data = await response.json();
+            this.setState({
+                data: data
+            });
+            Alert.alert(JSON.stringify(data));
+        } catch (e) {
+            console.log(e);
+        }
+
     }
-];
+}
 
 const styles = StyleSheet.create({
     container: {

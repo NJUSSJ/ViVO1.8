@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         position: 'absolute',
-        top: 10,
+        top: 300,
     }
 });
