@@ -41,6 +41,11 @@ export default class Login extends Component {
                     this.props.navigation.navigate('Root');
                     API.toastLong('登录成功');
                     global.username = this.state.username;
+                    storage.save({
+                        key: 'username',
+                        id: '1',
+                        data: this.state.username
+                      })
                     break;
                 }
                 case 'wrongPassword': {
