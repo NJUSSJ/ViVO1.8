@@ -243,4 +243,5 @@ export default {
     modalAlert,
     confirmAlert,
     imagePicker,
+    f_post
 }

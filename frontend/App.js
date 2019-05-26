@@ -65,20 +65,24 @@ const BottomTab = createBottomTabNavigator(
 
 
 const StacksOverTabs = createStackNavigator({
+  Root: {
+    screen: BottomTab,
+    navigationOptions: {
+      header: null
+    }
+  },
+  
   Login: {
     screen: Login,
     navigationOptions: {
       header: null
     }
   },
+
+
+
   SignUp: {
-      screen: SignUp,
-      navigationOptions: {
-        header: null
-      }
-  },
-  Root: {
-    screen: BottomTab,
+    screen: SignUp,
     navigationOptions: {
       header: null
     }

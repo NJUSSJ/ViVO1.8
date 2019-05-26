@@ -17,17 +17,12 @@ export default class Login extends Component {
             <View style={styles.container}>
                 <View style={styles.loginPane}>
                     <Text style={{fontSize: 20}}>用户名:</Text>
-                    <TextInput style={styles.inputArea} onChangeText={(text) => {
-                        this.setState({username: text})
-                    }}/>
+                    <TextInput style={styles.inputArea} onChangeText={(text) => {this.setState({username: text})}}/>
                     <Text style={{fontSize: 20}}>密码:</Text>
-                    <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {
-                        this.setState({password: text})
-                    }}/>
+                    <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
                     <Button title="登录" onPress={this.login} color='#be8dbd'/>
-                    <Text style={{marginTop: 20, marginLeft: 80}} onPress={() => {
-                        this.props.navigation.navigate('SignUp')
-                    }}>没有账号？去注册一个</Text>
+                    <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
+
                 </View>
             </View>
         );
@@ -35,8 +30,12 @@ export default class Login extends Component {
 
     async login() {
         try {
-
-        } catch (e) {
+            let formData = new FormData();
+            formData.append('username', this.state.username);
+            formData.append('password', this.state.password);
+            let response = await API._fetch(API.f_post('/login', formData));
+            Alert.alert(await response.text());
+12        } catch (e) {
             console.log(e);
         }
     }
