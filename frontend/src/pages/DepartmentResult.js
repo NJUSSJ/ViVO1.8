@@ -1,54 +1,48 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert, ScrollView} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
-export default class HighScore extends Component {
-
-    constructor(){
+export default class DepartmentResult extends Component {
+    constructor() {
         super();
+        this.search = this.search.bind(this);
         this.state = {
             data: []
-        };
-        this.getHighScore = this.getHighScore.bind(this);
+        }
     }
 
-    componentDidMount() {
-        this.getHighScore();
+    componentDidMount(): void {
+        const searchText = this.props.navigation.getParam("searchText", "");
+        this.search(searchText);
+        console.log(this.search);
     }
 
     render() {
+
+
+
         return (
-            <ScrollView style={styles.container}>
-                <View style={styles.title}>
-                    <Text style={{
-                        fontSize: 30,
-                        marginLeft: 10,
-                        marginTop: 10,
-                        borderColor: 'grey',
-                        color: 'black'
-                    }}>高分课程</Text>
-                    <Text style={{marginTop: 26, marginLeft: 10}}>(每周二6:00更新)</Text>
-                </View>
+            <View style={styles.container}>
                 <View style={styles.list}>
                     <FlatList
                         data={this.state.data}
-                        keyExtractor={(item, index) => item.courseId.toString()}
+                        keyExtractor={(item, index) => item.courseId}
                         renderItem={({item}) => <TouchableOpacity onPress={() => {this.props.navigation.navigate('Detail', {courseId: item.courseId})}}>
                             <CourseItem picUrl={item.picUrl} courseName={item.courseName} department={item.department}
                                         teacher={item.instructor} overallScore={item.overallScore}/>
                         </TouchableOpacity>}/>
                 </View>
-
-            </ScrollView>
+            </View>
         );
     }
 
-    async getHighScore() {
+    async search(searchText) {
         try {
             let formData = new FormData();
-            formData.append('keyword', 'keyword');
-            let response = await API._fetch(API.f_post('/course/highScore', formData));
+            formData.append("department", searchText);
+            let response = await API._fetch(API.f_post('/course/classification', formData));
             let data = await response.json();
+            console.log(data);
             this.setState({
                 data: data
             });

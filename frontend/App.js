@@ -15,6 +15,7 @@ import Search from './src/pages/Search'
 import Detail from './src/pages/Detail'
 import Score from './src/pages/Score'
 import SearchResult from './src/pages/SerachResult'
+import DepartmentResult from './src/pages/DepartmentResult'
 import Storage from "react-native-storage"
 global.storage = new Storage({
   size: 1000, //最大容量
@@ -51,6 +52,12 @@ const HomeStack = createStackNavigator({
     screen: Home,
     navigationOptions: {
       header: null
+    }
+  },
+  DepartmentResult: {
+    screen: DepartmentResult,
+    navigationOptions: {
+      title: "院系课程"
     }
   },
   Detail: {

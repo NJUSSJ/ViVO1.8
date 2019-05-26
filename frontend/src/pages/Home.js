@@ -25,22 +25,27 @@ export default class Home extends Component {
                 </View>
                 <DepartmentItem
                     iconUrl={require('../assets/jisuanji.png')}
+                    nav={this.props.navigation}
                     departName={'软件学院'} />
         
                 <DepartmentItem
-                 iconUrl={require('../assets/tianwenxue.png')}
-                 departName={'天文与空间学院'}/>
+                 iconUrl={require('../assets/tongji.png')}
+                 nav={this.props.navigation}
+                 departName={'数学系'}/>
                    
                 <DepartmentItem
-                iconUrl={require('../assets/yuwen.png')}
-                departName={'文学院'}/>
+                iconUrl={require('../assets/banhui.png')}
+                nav={this.props.navigation}
+                departName={'社会学院'}/>
 
                 <DepartmentItem
                      iconUrl={require('../assets/wuli.png')}
+                     nav={this.props.navigation}
                      departName={'物理学院'}/>
                    
                 <DepartmentItem
                 iconUrl={require('../assets/dianzijishu.png')}
+                nav={this.props.navigation}
                 departName={'电子科学与工程学院'}/>
                     
             </View>
