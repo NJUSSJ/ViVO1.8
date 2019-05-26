@@ -12,6 +12,7 @@ import Login from './src/pages/Login'
 import SignUp from './src/pages/SignUp'
 import HighScore from './src/pages/HighScore'
 import Search from './src/pages/Search'
+import Detail from './src/pages/Detail'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -82,7 +83,13 @@ const StacksOverTabs = createStackNavigator({
     navigationOptions: {
       header: null
     }
-  }
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: {
+      header: null
+    }
+  },
 })
 
 const StacksOverTab = createAppContainer(StacksOverTabs);
