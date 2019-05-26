@@ -8,7 +8,7 @@ export default class DepartmentItem extends Component {
         super(props);
     }
     render() {
-        return <TouchableOpacity >
+        return <TouchableOpacity onPress={()=>{this.props.nav.navigate('DepartmentResult', {searchText: this.props.departName})}}>
             <View style={styles.itemContainer}>
             <Image source={this.props.iconUrl} style={styles.icon}></Image>
             <Text style={styles.departName}>{this.props.departName}</Text>

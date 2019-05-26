@@ -11,7 +11,7 @@ export default class CourseItem extends React.Component{
     render() {
         return (
             <View style={styles.container}>
-                <Image source={this.props.picUrl} style={{width: 70, height: 70}}/>
+                <Image source={{uri: this.props.picUrl}} style={{width: 70, height: 70}}/>
                 <View style={{marginLeft: 9}}>
                     <Text style={{fontSize: 22, color: 'black', overflow: 'hidden', width: API.reset(200)}}>{this.props.courseName}</Text>
                     <Text style={{marginTop: 5}}>{this.props.department}、{this.props.teacher}</Text>
