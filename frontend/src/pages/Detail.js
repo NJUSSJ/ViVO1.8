@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: '#000',
         marginBottom: 20,
-        width: 300
+        width: 250
     },
     remarkBtn: {
         color: '#efb336', 

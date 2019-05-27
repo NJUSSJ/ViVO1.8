@@ -25,7 +25,7 @@ export default class Login extends Component {
                         <Text style={{fontSize: 15}}>密码:</Text>
                         <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
                         <Button title="登录" onPress={this.login} color='#be8dbd'/>
-                        <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
+                        <Text style={{marginTop: 20, marginLeft: 60}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
                     </View>
                 </Card>
             </View>

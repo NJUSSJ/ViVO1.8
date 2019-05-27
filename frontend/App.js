@@ -36,13 +36,13 @@ const HighScoreStack = createStackNavigator({
   HighScore: {
     screen: HighScore,
     navigationOptions: {
-      header: null
+      header: null,
     }
   },
   Detail: {
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
-      header: null,
+      header: null
     })
   }
 });
@@ -63,7 +63,7 @@ const HomeStack = createStackNavigator({
   Detail: {
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
-      header: null,
+      header: null
     })
   }
 
@@ -73,19 +73,20 @@ const SearchStack = createStackNavigator({
   Search: {
     screen: Search,
     navigationOptions: {
-      header: null
+      header: null,
     }
   },
   SearchResult: {
     screen: SearchResult,
-    navigationOptions: {
-      title: "搜索结果"
-    }
+    navigationOptions: ({navigation}) => ({
+      title: "搜索结果",
+      gesturesEnabled: true
+    })
   },
   Detail: {
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
-      header: null
+      header: null,
     })
   }
 });
