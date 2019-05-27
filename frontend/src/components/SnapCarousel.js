@@ -61,6 +61,8 @@ export default class SnapCarousel extends Component {
               renderItem={this._renderItem}
               sliderWidth={API.width*19/20}
               itemWidth={API.width*19/20}
+              loop={true}
+              autoplay={true}
             />
         );
     }

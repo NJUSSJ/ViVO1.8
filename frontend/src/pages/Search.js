@@ -26,6 +26,7 @@ export default class Search extends Component {
                         <Image source={require('../assets/sousuo-2.png')} style={{width: 50, height: 50, marginLeft: 10}}/>
                     </TouchableOpacity>
                 </View>
+
             </View>
          
             
