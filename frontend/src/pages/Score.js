@@ -41,6 +41,14 @@ export default class Score extends Component{
     }
 
     async submit(id) {
+        let comment = this.state.comment;
+
+
+        if ((comment.length < 30 || comment.length > 100) && comment.length !== 0) {
+            API.toastLong('评价字数需要在30-100之间～请重新输入');
+            return;
+        }
+
         try {
             let formData = new FormData();
             formData.append('courseId', id);
@@ -113,7 +121,7 @@ export default class Score extends Component{
                <Textarea
                         rowSpan={5} 
                         bordered 
-                        placeholder="请输入你对课程的评价～您的评论将会展示在课程详情中" 
+                        placeholder="请输入评价（老师教学质量高，风趣幽默我超喜欢他的，课程安排合理，作业压力也不大，推荐大家选。）" 
                         onChangeText={(comment) => {
 
                         this.setState({ comment })
