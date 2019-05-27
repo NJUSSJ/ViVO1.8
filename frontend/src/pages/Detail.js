@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
     courseName: {
         fontSize: 25,
         color: '#000',
-        marginBottom: 20
+        marginBottom: 20,
+        width: 300
     },
     remarkBtn: {
         color: '#efb336', 

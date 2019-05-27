@@ -20,9 +20,9 @@ export default class Login extends Component {
         justifyContent: 'center'}}>
                     <Text style={{fontSize: 23, borderBottomColor: '#be8dbd', borderBottomWidth: 1, marginBottom: 50}}>登   录</Text>
                     <View >
-                        <Text style={{fontSize: 20}}>用户名:</Text>
+                        <Text style={{fontSize: 15}}>用户名:</Text>
                         <TextInput style={styles.inputArea} onChangeText={(text) => {this.setState({username: text})}}/>
-                        <Text style={{fontSize: 20}}>密码:</Text>
+                        <Text style={{fontSize: 15}}>密码:</Text>
                         <TextInput style={styles.inputArea} secureTextEntry={true} onChangeText={(text) => {this.setState({password: text})}}/>
                         <Button title="登录" onPress={this.login} color='#be8dbd'/>
                         <Text style={{marginTop: 20, marginLeft: 80}} onPress={()=>{this.props.navigation.navigate('SignUp')}}>没有账号？去注册一个</Text>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 0,
         borderBottomWidth: 2,
         width: 300,
-        fontSize: 20,
+        fontSize: 15,
         marginBottom: 40
     }
 });

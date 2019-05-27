@@ -75,8 +75,8 @@ export default class Score extends Component{
                  <Image source={require('../assets/bj-icon-fh.png')} style={styles.backIcon}></Image>
             </TouchableOpacity>
 
-            <Card style={{height: API.height*3/4, padding: 20, alignItems: 'center', marginBottom: 30}}>
-               <View style={{height: API.height*8/16}}>
+            <Card style={{padding: 20, alignItems: 'center', marginBottom: 30}}>
+               <View>
                <Text style={styles.courseName}>{info.courseName}</Text>
                 <Text>{info.department}、{info.instructor}</Text>
 
@@ -85,17 +85,17 @@ export default class Score extends Component{
                     <StarRating
                         maxStars={5}
                         disabled={false}
-                        starSize={50}
+                        starSize={35}
                         onStarChange={(value) => this.onOverallPress(value)}
                     />
                 </View>
 
-                <View style={{width: 300, alignItems: 'center', marginTop: 40}}>
+                <View style={{width: 300, alignItems: 'center', marginTop: 20}}>
                     <Text style={{color: '#be8dbd'}}>教师评分</Text>
                     <StarRating
                         maxStars={5}
                         disabled={false}
-                        starSize={30}
+                        starSize={20}
                         onStarChange={(value) => this.onTeacherPress(value)}
                     />
                 </View>
@@ -104,7 +104,7 @@ export default class Score extends Component{
                     <StarRating
                         maxStars={5}
                         disabled={false}
-                        starSize={30}
+                        starSize={20}
                         onStarChange={(value) => this.onContentPress(value)}
                     />
                 </View>
@@ -159,5 +159,6 @@ const styles = StyleSheet.create({
         height: API.height*3/16,
         borderRadius: 5,
         width: API.width-100,
+        marginTop: 20
     }
 })

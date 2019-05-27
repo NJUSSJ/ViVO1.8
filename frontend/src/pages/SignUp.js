@@ -63,15 +63,15 @@ export default class SignUp extends React.Component {
                  <Text style={{fontSize: 23, borderBottomColor: '#be8dbd', borderBottomWidth: 1, marginBottom: 40}}>注    册</Text>
                    
                 <View >
-                    <Text style={{fontSize: 20}}>学号:</Text>
+                    <Text style={{fontSize: 15}}>学号:</Text>
                     <TextInput style={styles.inputArea}
                         onChangeText={(text)=>this.setState({uname: text})}
                     />
-                    <Text style={{fontSize: 20}}>密码:</Text>
+                    <Text style={{fontSize: 15}}>密码:</Text>
                     <TextInput style={styles.inputArea} 
                     onChangeText={(text)=>this.setState({password: text})}
                     secureTextEntry={true}/>
-                    <Text style={{fontSize: 20}}>确认密码:</Text>
+                    <Text style={{fontSize: 15}}>确认密码:</Text>
                     <TextInput style={styles.inputArea} 
                     onChangeText={(text)=>this.setState({passwordAgain: text})}
                     secureTextEntry={true}/>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 0,
         borderBottomWidth: 2,
         width: 300,
-        fontSize: 20,
+        fontSize: 15,
         marginBottom: 40
     }
 });
