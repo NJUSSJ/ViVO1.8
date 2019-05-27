@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet,  View, ScrollView, Text, Button,
-    TouchableOpacity, Image, ImageBackground, FlatList} from 'react-native';
+    TouchableOpacity, Image, ImageBackground, FlatList, DeviceEventEmitter} from 'react-native';
 import API from '../utils/methods';
 import StarRating from '../components/StarRating';
 import {Card, CardItem, Body} from 'native-base';
@@ -16,6 +16,10 @@ export default class Detail extends Component {
 
     componentDidMount() {
         let id = this.props.navigation.getParam('courseId');
+        let _this = this;
+        DeviceEventEmitter.addListener('score', (event)=>{
+            this.getCourseInfo(id);
+        })
         this.getCourseInfo(id);
     }
 
@@ -73,7 +77,7 @@ export default class Detail extends Component {
                     </View>
                 </View>
 
-                <View style={{marginTop: 30, borderLeftColor: '#e6e6e6', borderLeftWidth: 2, paddingLeft: 20, marginBottom: 5}}>
+                <View style={{marginTop: 30, borderLeftColor: '#e6e6e6', borderLeftWidth: 2, paddingLeft: 20}}>
                     <Text style={styles.classInfo}>教师：{info.instructor}</Text>
                     <Text style={styles.classInfo}>院系：{info.department}</Text>
                     <Text style={styles.classInfo}>上课时间地点：{info.timeAndPlace}</Text>

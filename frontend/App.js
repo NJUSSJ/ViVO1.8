@@ -16,6 +16,7 @@ import Detail from './src/pages/Detail'
 import Score from './src/pages/Score'
 import SearchResult from './src/pages/SerachResult'
 import DepartmentResult from './src/pages/DepartmentResult'
+import DepartList from './src/pages/DepartList'
 import Storage from "react-native-storage"
 global.storage = new Storage({
   size: 1000, //最大容量
@@ -50,6 +51,12 @@ const HighScoreStack = createStackNavigator({
 const HomeStack = createStackNavigator({
   Home:{
     screen: Home,
+    navigationOptions: {
+      header: null
+    }
+  },
+  DepartList: {
+    screen: DepartList,
     navigationOptions: {
       header: null
     }
