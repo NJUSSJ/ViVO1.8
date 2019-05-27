@@ -10,17 +10,28 @@ export default class Detail extends Component {
     constructor(props){
         super(props);
         this.state = {
-            courseInfo: {}
+            courseInfo: {},
+            commentRes: {},
+            username: '',
         }
     }
 
     componentDidMount() {
         let id = this.props.navigation.getParam('courseId');
-        let _this = this;
         DeviceEventEmitter.addListener('score', (event)=>{
             this.getCourseInfo(id);
         })
         this.getCourseInfo(id);
+
+        let _this = this;
+        storage.load({
+            key: 'username',
+            id: '1'
+        }).then(ret => {
+            _this.setState({
+                username: ret
+            });
+        })
     }
 
     async getCourseInfo(id) {
@@ -30,7 +41,14 @@ export default class Detail extends Component {
             let response = await API._fetch(API.f_post('/course/detail', formData));
             let responseJson = await response.json();
 
-            this.setState({courseInfo: responseJson})
+            let commentForm = new FormData();
+            commentForm.append('username', this.state.username);
+            commentForm.append('courseId', id);
+            let commentRes = await API._fetch(API.f_post('/course/comment', commentForm));
+            let commentResJson = await commentRes.json();
+
+            console.log(commentResJson);
+            this.setState({courseInfo: responseJson, commentRes: commentResJson})
         }
         catch(error) {
             console.error(error);
@@ -95,13 +113,14 @@ export default class Detail extends Component {
 
                 <Text style={{marginTop: 10,borderLeftColor: '#e6e6e6', borderLeftWidth: 2, paddingLeft: 20, marginBottom: 10}}>用户评论</Text>
                 <FlatList
-                    data={info.comments}
+                    data={this.state.commentRes}
                     renderItem={({item})=> 
                     <CommentItem 
-                        username={item.username} 
-                        comment={item.comment}
+                        username={this.state.username}
+                        courseComment={item.courseComment} 
+                        isUpVotedByUser={item.upVotedByUser}
                     />}
-                    keyExtractor={(item, index) => item.courseCommentId.toString()}
+                    keyExtractor={(item, index) => item.courseComment.courseCommentId.toString()}
                     />
            </View>
            

@@ -14,7 +14,8 @@
     "react-native-snap-carousel": "^3.8.0",
     "react-navigation": "^3.5.1",
     "react-native-root-toast": "^3.0.2",
-    "react-native-storage": "^1.0.0"
+    "react-native-storage": "^1.0.0",
+    "globals": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
