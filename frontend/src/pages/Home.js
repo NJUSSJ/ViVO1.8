@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, ScrollView, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, ScrollView, Button, TouchableOpacity} from 'react-native';
 import SnapCarousel from '../components/SnapCarousel'
 import DepartmentItem from '../components/DepartmentItem'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import API from '../utils/methods'
 
 export default class Home extends Component {
@@ -23,7 +22,7 @@ export default class Home extends Component {
                     <Text style={styles.recommandPrompt}>
                         热门学院
                     </Text>
-                    <TouchableOpacity >
+                    <TouchableOpacity style={{position: 'absolute', right:20}} onPress={()=>this.props.navigation.navigate('DepartList')}>
                         <Text style={{color: '#be8dbd', fontSize: 17, marginTop: 18}}>查看更多</Text>
                     </TouchableOpacity>
                 </View>
@@ -43,7 +42,7 @@ export default class Home extends Component {
                 departName={'社会学院'}/>
 
                 <DepartmentItem
-                     iconUrl={require('../assets/wuli.png')}
+                     iconUrl={require('../assets/wuli-2.png')}
                      nav={this.props.navigation}
                      departName={'物理学院'}/>
                    
