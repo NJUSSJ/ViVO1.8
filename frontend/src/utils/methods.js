@@ -72,7 +72,6 @@ function f_post(url, formData) {
             'Content-Type':'multipart/form-data',
         },
         body: formData,
-        dataTyle: 'text'
     };
     var promise = new Promise(function (resolve, reject) {
         fetch(address + url, options).then(data => {

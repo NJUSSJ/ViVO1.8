@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView, Button, TouchableOpacity,
-    Image, TextInput, Alert} from 'react-native';
+    Image, TextInput, Alert, DeviceEventEmitter} from 'react-native';
 import API from '../utils/methods';
 import {Card, CardItem, Body, Textarea} from 'native-base'
 import StarRating from '../components/StarRating'
@@ -18,15 +18,14 @@ export default class Score extends Component{
     }
 
     componentDidMount(): void {
+        let _this = this;
         storage.load({
             key: 'username',
             id: '1'
         }).then(ret => {
-            this.setState({
+            _this.setState({
                 username: ret
             });
-
-
         })
 
     }
@@ -45,19 +44,26 @@ export default class Score extends Component{
         try {
             let formData = new FormData();
             formData.append('courseId', id);
-            formData.append('username', username);
+            formData.append('username', this.state.username);
             formData.append('comment', this.state.comment);
             formData.append('overallScore', this.state.overallScore);
             formData.append('teacherScore', this.state.teacherScore);
             formData.append('contentScore', this.state.contentScore);
-            formData.append('date', new Date());
 
-            let response = await API._fetch(API.f_post('/comment/upload', formData));
-            let data = await response.json();
-            Alert(JSON.stringify(data));
+            console.log(formData);
+            let response = await API._fetch(API.f_post('/course/comment/upload', formData));
+            let res = await response.text();
+            
+            if (res === 'success') {
+                DeviceEventEmitter.emit('score');
+                API.toastLong('评价成功！请等待跳转...')
+                setTimeout(()=>{
+                    this.props.navigation.goBack();
+                }, 2000)
+            }
         }
         catch(error) {
-            console.log(error);
+            console.log('err', error);
         }
     }
 

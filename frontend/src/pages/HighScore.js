@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Alert, ScrollView} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, 
+    Alert, ScrollView, DeviceEventEmitter} from 'react-native';
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class HighScore extends Component {
@@ -13,6 +14,10 @@ export default class HighScore extends Component {
     }
 
     componentDidMount() {
+        let _this = this;
+        DeviceEventEmitter.addListener('score',(event)=>{
+            _this.getHighScore();
+        })
         this.getHighScore();
     }
 

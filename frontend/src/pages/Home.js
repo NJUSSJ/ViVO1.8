@@ -44,9 +44,9 @@ export default class Home extends Component {
                      departName={'物理学院'}/>
                    
                 <DepartmentItem
-                iconUrl={require('../assets/dianzijishu.png')}
+                iconUrl={require('../assets/tianwenxue.png')}
                 nav={this.props.navigation}
-                departName={'电子科学与工程学院'}/>
+                departName={'天文与空间科学学院'}/>
                     
             </View>
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         // flex: 1,
     },
     recommandPrompt:{
-        fontSize: 28,
+        fontSize: 25,
         color: '#000',
         margin: 10,
     }

@@ -18,8 +18,8 @@ export default class CourseItem extends React.Component{
                     <Text style={{marginTop: 5}}>{this.props.department}、{this.props.teacher}</Text>
                 </View>
                 <View style={{flexDirection: 'row', position: 'absolute', right: 50}}>
-                    <StarRating maxStars={5} rating={this.props.overallScore} disabled={true} starSize={20} style={{marginTop: 30}}/>
-                    <Text style={{marginTop: 5, marginLeft:10, fontSize: 20}}>{this.props.overallScore}</Text>
+                    <StarRating maxStars={5} rating={this.props.overallScore} disabled={true} starSize={15} style={{marginTop: 30}}/>
+                    <Text style={{marginTop: 0, marginLeft:10, fontSize: 15}}>{parseFloat(this.props.overallScore).toFixed(1)}</Text>
                 </View>
             </View>
         );
