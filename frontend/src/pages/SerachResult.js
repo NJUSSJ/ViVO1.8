@@ -3,6 +3,7 @@ import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Scr
 import API from '../utils/methods'
 import CourseItem from '../components/CourseItem'
 export default class SerachResult extends Component {
+
     constructor() {
         super();
         this.search = this.search.bind(this);
@@ -65,6 +66,5 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         borderColor: 'grey',
-        borderTopWidth: 1
     }
 });

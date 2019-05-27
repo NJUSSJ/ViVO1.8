@@ -63,7 +63,7 @@ export default class SignUp extends React.Component {
                  <Text style={{fontSize: 23, borderBottomColor: '#be8dbd', borderBottomWidth: 1, marginBottom: 40}}>注    册</Text>
                    
                 <View >
-                    <Text style={{fontSize: 15}}>学号:</Text>
+                    <Text style={{fontSize: 15}}>用户名:</Text>
                     <TextInput style={styles.inputArea}
                         onChangeText={(text)=>this.setState({uname: text})}
                     />

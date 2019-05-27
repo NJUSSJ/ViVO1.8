@@ -86,8 +86,7 @@ const SearchStack = createStackNavigator({
   SearchResult: {
     screen: SearchResult,
     navigationOptions: ({navigation}) => ({
-      title: "搜索结果",
-      gesturesEnabled: true
+      title: "搜索结果"
     })
   },
   Detail: {
