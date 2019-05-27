@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ScrollView, Button} from 'react-native';
 import SnapCarousel from '../components/SnapCarousel'
 import DepartmentItem from '../components/DepartmentItem'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import API from '../utils/methods'
 
 export default class Home extends Component {
     constructor(props) {
@@ -13,15 +15,17 @@ export default class Home extends Component {
                 热门课程
             </Text>
             <View>
-                <SnapCarousel/>
+                <SnapCarousel nav={this.props.navigation}/>
             </View>
             
             <View style={{marginTop: 20}}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row', width: API.width}}>
                     <Text style={styles.recommandPrompt}>
                         热门学院
                     </Text>
-                    {/* <Button title={'查看更多'}></Button> */}
+                    <TouchableOpacity >
+                        <Text style={{color: '#be8dbd', fontSize: 17, marginTop: 18}}>查看更多</Text>
+                    </TouchableOpacity>
                 </View>
                 <DepartmentItem
                     iconUrl={require('../assets/jisuanji.png')}

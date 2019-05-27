@@ -17,10 +17,10 @@ export default class SnapCarousel extends Component {
         this.getHighScore();
     }
 
-    _renderItem ({item, index}) {
+    _renderItem = ({item, index}) =>  {
         return (
             <TouchableOpacity style={styles.cardContainer} key={item.courseId}
-                // onPress={()=>{this.props.nav.navigate('Detail', {courseId: item.courseId})}}
+                onPress={()=>{this.props.nav.navigate('Detail', {courseId: item.courseId})}}
             >
                 <Image style={styles.image} source={{uri: item.picUrl}}></Image>
                 <Text style={styles.courseName}>{ item.courseName }</Text>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     image:{
         width: API.width*9/10-2,
         height: 200,
-        borderRadius: 5
+        borderRadius: 5,
     },
     courseName: {
         fontSize: 22,
